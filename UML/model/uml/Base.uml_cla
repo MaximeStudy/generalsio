@@ -12,5 +12,25 @@
     isSubstitutable='true'>
    <general href='urn:uuid:f4ba15ce-5c37-45f0-8880-cfe01c85ff1c'/>
   </generalization>
+  <ownedAttribute xmi:type='uml:Property' xmi:uuid='urn:uuid:68abf7ec-398f-4a7f-b189-317edf9c909c'
+    isDerived='false'
+    isDerivedUnion='false'
+    isID='false'
+    isLeaf='false'
+    isOrdered='false'
+    isReadOnly='false'
+    isStatic='true'
+    isUnique='true'
+    name='c_Type'
+    aggregation='none'
+    visibility='private'>
+   <type href='http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String'/>
+   <lowerValue xmi:type='uml:LiteralInteger' xmi:uuid='urn:uuid:2747112e-cc0f-4aca-a4fa-264b09ce935f'
+     value='1'
+     visibility='public'/>
+   <upperValue xmi:type='uml:LiteralUnlimitedNatural' xmi:uuid='urn:uuid:6820187c-12d2-463b-b4c0-b5058348503e'
+     value='1'
+     visibility='public'/>
+  </ownedAttribute>
  </uml:Class>
 </xmi:XMI>

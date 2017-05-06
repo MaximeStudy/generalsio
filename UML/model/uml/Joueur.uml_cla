@@ -124,7 +124,7 @@
     isLeaf='false'
     isQuery='false'
     isStatic='false'
-    name='sommeArme'
+    name='sommeArmee'
     concurrency='sequential'
     visibility='public'>
    <ownedParameter xmi:type='uml:Parameter' xmi:uuid='urn:uuid:5b624438-b38b-4be9-9e56-e87ec669252b'
@@ -151,6 +151,75 @@
      isUnique='true'
      direction='return'>
     <type href='http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer'/>
+   </ownedParameter>
+  </ownedOperation>
+  <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:f6d100f4-f8af-4260-a5d9-96d913b36fa0'
+    isAbstract='false'
+    isLeaf='false'
+    isQuery='false'
+    isStatic='false'
+    name='RecupererSoldat'
+    concurrency='sequential'
+    visibility='public'>
+   <ownedParameter xmi:type='uml:Parameter' xmi:uuid='urn:uuid:74153194-9171-48ed-ab9b-be935eb2af5e'
+     isException='false'
+     isOrdered='false'
+     isStream='false'
+     isUnique='true'
+     name='e'
+     direction='in'>
+    <type href='urn:uuid:3decf7b6-6dd6-4e21-b4cd-d57e556675af'/>
+   </ownedParameter>
+  </ownedOperation>
+  <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:879bf88b-63d2-479b-9a79-0726eb7fd444'
+    isAbstract='false'
+    isLeaf='false'
+    isQuery='false'
+    isStatic='false'
+    name='getListMesCases'
+    concurrency='sequential'
+    visibility='public'/>
+  <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:7dbe745d-6b48-46bd-ac48-0428918cf075'
+    isAbstract='false'
+    isLeaf='false'
+    isQuery='false'
+    isStatic='false'
+    name='getListAction'
+    concurrency='sequential'
+    visibility='public'/>
+  <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:273468ba-35a9-470f-a3f8-6fcba264298f'
+    isAbstract='false'
+    isLeaf='false'
+    isQuery='false'
+    isStatic='false'
+    name='getEstSur'
+    concurrency='sequential'
+    visibility='public'>
+   <ownedParameter xmi:type='uml:Parameter' xmi:uuid='urn:uuid:f3977d75-021d-45be-8c8f-4a3b20794bec'
+     isException='false'
+     isOrdered='false'
+     isStream='false'
+     isUnique='true'
+     direction='return'>
+    <type href='urn:uuid:3decf7b6-6dd6-4e21-b4cd-d57e556675af'/>
+   </ownedParameter>
+  </ownedOperation>
+  <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:2aba3bef-061e-4e4d-a823-61b332bae6a2'
+    isAbstract='false'
+    isLeaf='false'
+    isQuery='false'
+    isStatic='false'
+    name='setEstSur'
+    concurrency='sequential'
+    visibility='public'>
+   <ownedParameter xmi:type='uml:Parameter' xmi:uuid='urn:uuid:5460f42f-a788-404f-97b5-0ab011c3b4b9'
+     isException='false'
+     isOrdered='false'
+     isStream='false'
+     isUnique='true'
+     name='e'
+     direction='in'>
+    <type href='urn:uuid:3decf7b6-6dd6-4e21-b4cd-d57e556675af'/>
    </ownedParameter>
   </ownedOperation>
  </uml:Class>
