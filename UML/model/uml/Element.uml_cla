@@ -237,23 +237,6 @@
     <type href='http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer'/>
    </ownedParameter>
   </ownedOperation>
-  <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:32316d26-f794-4583-8d60-3bb47771205d'
-    isAbstract='false'
-    isLeaf='false'
-    isQuery='false'
-    isStatic='false'
-    name='toString'
-    concurrency='sequential'
-    visibility='public'>
-   <ownedParameter xmi:type='uml:Parameter' xmi:uuid='urn:uuid:8d415401-934b-480a-9948-29147ffe336f'
-     isException='false'
-     isOrdered='false'
-     isStream='false'
-     isUnique='true'
-     direction='return'>
-    <type href='http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#String'/>
-   </ownedParameter>
-  </ownedOperation>
   <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:7f4f1a3e-3e3d-4c6b-be10-b5516a8df3c7'
     isAbstract='false'
     isLeaf='false'

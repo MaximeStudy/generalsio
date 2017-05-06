@@ -260,5 +260,13 @@
     <type href='http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer'/>
    </ownedParameter>
   </ownedOperation>
+  <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:3c3822ea-79d5-4dd9-90da-f827a4d7055f'
+    isAbstract='false'
+    isLeaf='false'
+    isQuery='false'
+    isStatic='false'
+    name='PrendreSoldat'
+    concurrency='sequential'
+    visibility='public'/>
  </uml:Class>
 </xmi:XMI>
