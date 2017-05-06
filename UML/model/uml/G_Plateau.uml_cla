@@ -211,7 +211,7 @@
     isAbstract='false'
     isLeaf='false'
     isQuery='false'
-    isStatic='false'
+    isStatic='true'
     name='getSoldatCourantJoueur'
     concurrency='sequential'
     visibility='public'>

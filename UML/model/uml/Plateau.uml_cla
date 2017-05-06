@@ -37,7 +37,7 @@
     isLeaf='false'
     isQuery='false'
     isStatic='true'
-    name='InitaliserCarte'
+    name='initaliserCarte'
     concurrency='sequential'
     visibility='public'/>
   <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:ca326c69-3467-4e98-ab0a-8046228fec0b'
