@@ -8,31 +8,11 @@
    isLeaf='false'
    name='Plateau'
    visibility='public'>
-  <ownedAttribute xmi:type='uml:Property' xmi:uuid='urn:uuid:0b60a6ef-6a0c-475a-b109-d5058a76e616'
-    isDerived='false'
-    isDerivedUnion='false'
-    isID='false'
-    isLeaf='false'
-    isOrdered='false'
-    isReadOnly='false'
-    isStatic='false'
-    isUnique='true'
-    name='id'
-    aggregation='none'
-    visibility='private'>
-   <type href='http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer'/>
-   <lowerValue xmi:type='uml:LiteralInteger' xmi:uuid='urn:uuid:31d45bb0-0eca-423a-9e7a-e9d4592125bf'
-     value='1'
-     visibility='public'/>
-   <upperValue xmi:type='uml:LiteralUnlimitedNatural' xmi:uuid='urn:uuid:b947dc5f-f7cd-4c51-ab00-52b364b1097c'
-     value='1'
-     visibility='public'/>
-  </ownedAttribute>
   <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:81b6a057-fdeb-4322-8eb4-3df071b6898f'
     isAbstract='false'
     isLeaf='false'
     isQuery='false'
-    isStatic='false'
+    isStatic='true'
     name='getListElement'
     concurrency='sequential'
     visibility='public'/>
@@ -40,7 +20,7 @@
     isAbstract='false'
     isLeaf='false'
     isQuery='false'
-    isStatic='false'
+    isStatic='true'
     name='creerJoueur'
     concurrency='sequential'
     visibility='public'/>
@@ -48,7 +28,7 @@
     isAbstract='false'
     isLeaf='false'
     isQuery='false'
-    isStatic='false'
+    isStatic='true'
     name='positionerJoueur'
     concurrency='sequential'
     visibility='public'/>
@@ -56,9 +36,26 @@
     isAbstract='false'
     isLeaf='false'
     isQuery='false'
-    isStatic='false'
+    isStatic='true'
     name='InitaliserCarte'
     concurrency='sequential'
     visibility='public'/>
+  <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:ca326c69-3467-4e98-ab0a-8046228fec0b'
+    isAbstract='false'
+    isLeaf='false'
+    isQuery='false'
+    isStatic='true'
+    name='getPlateau'
+    concurrency='sequential'
+    visibility='public'>
+   <ownedParameter xmi:type='uml:Parameter' xmi:uuid='urn:uuid:c20cb567-9db1-4706-b0ca-8b30f582d8f4'
+     isException='false'
+     isOrdered='false'
+     isStream='false'
+     isUnique='true'
+     direction='return'>
+    <type href='urn:uuid:ac29902c-a1b6-413f-8a23-5d4d251b52c7'/>
+   </ownedParameter>
+  </ownedOperation>
  </uml:Class>
 </xmi:XMI>
