@@ -68,6 +68,26 @@
      value='1'
      visibility='public'/>
   </ownedAttribute>
+  <ownedAttribute xmi:type='uml:Property' xmi:uuid='urn:uuid:6efe499b-8280-4198-b373-bc42c50af03d'
+    isDerived='false'
+    isDerivedUnion='false'
+    isID='false'
+    isLeaf='false'
+    isOrdered='false'
+    isReadOnly='false'
+    isStatic='false'
+    isUnique='true'
+    name='mesJoueurs'
+    aggregation='none'
+    visibility='private'>
+   <type href='urn:uuid:223de756-1675-4e57-940a-2db54d691f6d'/>
+   <lowerValue xmi:type='uml:LiteralInteger' xmi:uuid='urn:uuid:63008d46-ac5c-45c0-bea6-9963b7b46899'
+     value='1'
+     visibility='public'/>
+   <upperValue xmi:type='uml:LiteralUnlimitedNatural' xmi:uuid='urn:uuid:39525366-844a-46c6-a0a1-95e368461f29'
+     value='1'
+     visibility='public'/>
+  </ownedAttribute>
   <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:c34906ba-188d-4755-b04e-f0ef1e8fb062'
     isAbstract='false'
     isLeaf='false'
@@ -220,6 +240,24 @@
      name='e'
      direction='in'>
     <type href='urn:uuid:3decf7b6-6dd6-4e21-b4cd-d57e556675af'/>
+   </ownedParameter>
+  </ownedOperation>
+  <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:afbe3f60-d6ec-4ab3-b5db-1b3acdf3564e'
+    isAbstract='false'
+    isLeaf='false'
+    isQuery='false'
+    isStatic='false'
+    name='getJoueur'
+    concurrency='sequential'
+    visibility='public'>
+   <ownedParameter xmi:type='uml:Parameter' xmi:uuid='urn:uuid:cfe2eb9e-9689-4cd5-8d71-64fb2c59cb49'
+     isException='false'
+     isOrdered='false'
+     isStream='false'
+     isUnique='true'
+     name='id'
+     direction='in'>
+    <type href='http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer'/>
    </ownedParameter>
   </ownedOperation>
  </uml:Class>
