@@ -1,6 +1,6 @@
 package model;
 
-public class Element {
+public abstract class Element {
     /**
      * @attribute
      */
@@ -9,17 +9,18 @@ public class Element {
     /**
      * @attribute
      */
-    private Boolean visible;
+    private Boolean visible=false;
 
     /**
      * @attribute
      */
-    private Integer x;
+    private Integer x=0;
 
     /**
      * @attribute
      */
     private Boolean estFranchissable;
+
 
     public Element(Integer x, Integer y) {
         this.x=x;
@@ -58,4 +59,5 @@ public class Element {
         return estFranchissable;
     }
 
+    
 }

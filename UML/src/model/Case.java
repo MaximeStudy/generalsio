@@ -55,8 +55,14 @@ public class Case extends Element {
     public Integer getCouleur() {
         return couleur;
     }
+    public int prendreSoldats(){
+        int nb=this.getNombreSoldats();
+        this.setNombreSoldats(1);
+        return nb;
+    }
 
 
     public void incrementerSoldat() {
+        this.nombreSoldats++;
     }
 }

@@ -4,8 +4,12 @@ public class Montagne extends Element {
     /**
      * @attribute
      */
-    private static String c_Type;
-
-    public Boolean getFranchissable() {
+    
+    public Montagne(int x,int y) {
+        super(x,y);
     }
+    public Boolean getFranchissable() {
+        return false;
+    }
+    
 }

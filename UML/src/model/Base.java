@@ -4,5 +4,7 @@ public class Base extends Chateau {
     /**
      * @attribute
      */
-    private static String c_Type;
+    public Base(int x,int y) {
+        super(x,y);
+    }
 }
