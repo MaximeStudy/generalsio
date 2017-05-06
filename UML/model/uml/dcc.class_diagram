@@ -2490,7 +2490,7 @@
           <contained xmi:type='DI:GraphNode' xmi:id='id8defea05-0c1c-4822-8538-7f38bd98d88d'>
             <contained xmi:type='DI:GraphNode' xmi:id='id0ccc34d8-b3b2-4802-ac29-c544f6b1836e'>
               <property xmi:type='DI:Property' key='id' value='classifierSingleCell'/>
-              <property xmi:type='DI:Property' key='preferredWidth' value='227.0'/>
+              <property xmi:type='DI:Property' key='preferredWidth' value='249.0'/>
               <property xmi:type='DI:Property' key='visible' value='true'/>
               <property xmi:type='DI:Property' key='editable' value='true'/>
               <property xmi:type='DI:Property' key='fixedWidth' value='false'/>
@@ -2503,7 +2503,7 @@
           <contained xmi:type='DI:GraphNode' xmi:id='id0aba7d63-97ef-4cb0-a574-ab97f50184c5'>
             <semanticModel xmi:type='DI:SimpleSemanticModelBridge' typeInfo='subShapeLinks'/>
           </contained>
-          <property xmi:type='DI:Property' key='FirstVisibleIndex' value='1'/>
+          <property xmi:type='DI:Property' key='FirstVisibleIndex' value='0'/>
           <property xmi:type='DI:Property' key='headerVisible' value='false'/>
           <semanticModel xmi:type='DI:SimpleSemanticModelBridge' typeInfo='OperationList'/>
           <size xmi:type='DI:Dimension' height='1.7248367071151733' width='0.0'/>

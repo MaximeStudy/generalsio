@@ -113,7 +113,7 @@
     isAbstract='false'
     isLeaf='false'
     isQuery='false'
-    isStatic='false'
+    isStatic='true'
     name='Element ajouterBase'
     concurrency='sequential'
     visibility='public'>
@@ -134,6 +134,15 @@
      name='y'
      direction='in'>
     <type href='http://www.omg.org/spec/UML/20110701/PrimitiveTypes.xmi#Integer'/>
+   </ownedParameter>
+   <ownedParameter xmi:type='uml:Parameter' xmi:uuid='urn:uuid:cf137540-62ac-48c7-bd91-a531a1934f48'
+     isException='false'
+     isOrdered='false'
+     isStream='false'
+     isUnique='true'
+     name='j'
+     direction='in'>
+    <type href='urn:uuid:223de756-1675-4e57-940a-2db54d691f6d'/>
    </ownedParameter>
   </ownedOperation>
   <ownedOperation xmi:type='uml:Operation' xmi:uuid='urn:uuid:f2c378ef-0ac7-488c-a5e9-6eced3f2a32b'
