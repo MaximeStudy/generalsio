@@ -1,3 +1,5 @@
+package projetSynthese;
+
 import javax.swing.JFrame;
 import java.awt.Dimension;
 import javax.swing.JPanel;
@@ -57,8 +59,8 @@ public class FenetreJeu extends JFrame
 
 		tab = new JLabel[LIGNE][COLONNE]; // cration du tableau de JLabel
 		
-		this.getContentPane().setLayout(null);						//Enlêve barre
-		this.setSize(new Dimension(1200, 1000));					//Taille fenêtre entiêre
+		this.getContentPane().setLayout(null);						//Enlï¿½ve barre
+		this.setSize(new Dimension(1200, 1000));					//Taille fenï¿½tre entiï¿½re
 		this.setTitle("Generalsio");
 		panelControle.setLayout(null);
 		panelGrille.setBounds(new Rectangle(200, 50, 850, 850));
