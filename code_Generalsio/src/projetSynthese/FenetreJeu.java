@@ -1,150 +1,188 @@
 package projetSynthese;
 
-import java.awt.Dimension;
-import java.awt.Rectangle;
 import javax.swing.border.EtchedBorder;
-import java.awt.GridLayout;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.Color;
 
  
 public class FenetreJeu extends JFrame
 {
-
+	private int LIGNE=18,COLONNE=18;
 	
-	int LIGNE=20,COLONNE=20;
-			
-	private JLabel[][] tabNombre; // tableau de JLabels
-//	private JLabel[][] tabDecor; // tableau de JLabels
-
-
-	private JPanel panelNombreGrille = new JPanel(); // panel du bas ( grille )
-	GridLayout gridNombreLayout = new GridLayout(20,20);
+	private JLabel[][] JL_cases; // tableau de JLabels
+	private JPanel JP_Grille = new JPanel(); 	// panel du bas ( grille )
+	private GridLayout GL_Matrice = new GridLayout(LIGNE,COLONNE); 	
 	
-//	private JPanel panelDecorGrille = new JPanel(); // panel du bas ( grille )
-//	GridLayout gridDecorLayout = new GridLayout(20,20);
+	private String dossierIcone = "Icone/";
 	
-	 //Constructeur, appelle mthode JBInit	
+	private String tour="tour.png";			
+	private String chateau="chateau.png";
+	private String montagne="montagne.png";
+	
+	Font font = new Font("Calibri",Font.CENTER_BASELINE,21);	//police écrite sur les cases
+	
+	//initialise la surface de jeu
 	public FenetreJeu()
 	{
-			jbInit();
-	}
-	 //initialise la surface de jeu. Cree tout les  elements et initialise leur position leur couleur.. etc
-	
-	private void jbInit()
-	{
+		JL_cases = new JLabel[LIGNE][COLONNE];	 // création du tableau de JLabel
+		this.getContentPane().setLayout(null);   // créé bandeau vide
+		this.setSize(new Dimension(1000, 800)); //Taille fenetre entiere
+		this.setTitle("Generalsio");			 //Titre
 
-		
-		tabNombre = new JLabel[LIGNE][COLONNE]; // cration du tableau de JLabel
-	//	tabDecor = new JLabel[LIGNE][COLONNE]; // cration du tableau de JLabel
-		
-
-		this.getContentPane().setLayout(null);						//Enleve barre
-
-		this.setSize(new Dimension(1200, 1000));					//Taille fenetre entiere
-		this.setTitle("Generalsio");								//Titre
-
-		panelNombreGrille.setBounds(new Rectangle(200, 50, 850, 850));	// ajuste le JPannel dans la JFrame
-		panelNombreGrille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//créé une bordure autour du pannel
-		panelNombreGrille.setLayout(gridNombreLayout);
-		
-
-	//	panelDecorGrille.setBounds(new Rectangle(200, 50, 850, 850));
-	//	panelDecorGrille.setLayout(gridDecorLayout);
-		
-		//this.add(panelDecorGrille);
-		this.add(panelNombreGrille);
-
-		
+		JP_Grille.setBounds(new Rectangle(150, 10, 700, 700));	// ajuste le JPannel dans la JFrame
+		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//créé une bordure autour du pannel
+		JP_Grille.setLayout(GL_Matrice);
+		this.add(JP_Grille);	
 
 		for (int ligne = 0; ligne < LIGNE; ligne++)
 		{
 			for (int colonne = 0; colonne < COLONNE; colonne++)
 			{
-				tabNombre[colonne][ligne] = new JLabel(); // creaation du JLabel
-				panelNombreGrille.add(tabNombre[colonne][ligne]); // ajouter au Panel
-				tabNombre[colonne][ligne].setOpaque(true);
-				tabNombre[colonne][ligne].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));	// encadre chaque case
-				}	
+				JL_cases[colonne][ligne] = new JLabel(); // creation du JLabel
+				JP_Grille.add(JL_cases[colonne][ligne]); // ajouter au Panel
+				JL_cases[colonne][ligne].setOpaque(true);
+				JL_cases[colonne][ligne].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));	// encadre chaque case
+			}	
 		}
-		
-		
-		/*
-		for (int ligne = 0; ligne < LIGNE; ligne++)
-		{
-			for (int colonne = 0; colonne < COLONNE; colonne++)
-			{
-				tabDecor[colonne][ligne] = new JLabel(); // creaation du JLabel
-				panelDecorGrille.add(tabDecor[colonne][ligne]); // ajouter au Panel
-				tabDecor[colonne][ligne].setOpaque(true);
-				tabDecor[colonne][ligne].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));	// encadre chaque case
-				}	
-		}*/
-		
-		Font font = new Font("Arial",Font.CENTER_BASELINE,20);
-		String dossierIcone = "Icone/";
-		
-
-
-		/*tabNombre[0][0].setText("1");
-		tabNombre[0][0].setFont(font);
-		tabNombre[0][0].setForeground(new Color(255,255,255));
-		tabNombre[0][0].setHorizontalAlignment(JLabel.CENTER);
-		tabNombre[0][0].setVerticalAlignment(JLabel.CENTER);
-		*/
-		
-	     
-		tabNombre[0][0].setBackground(new Color(200,0,0));		//carré rouge
-		tabNombre[0][1].setBackground(new Color(200,0,0));		//carré rouge
-		tabNombre[0][2].setBackground(new Color(200,0,0));		//carré rouge
-		
-		tabNombre[19][19].setBackground(new Color(0,0,200));		//carré bleu
-		tabNombre[19][18].setBackground(new Color(0,0,200));		//carré bleu
-		tabNombre[19][17].setBackground(new Color(0,0,200));		//carré bleu
-		
-		tabNombre[0][0].setIcon(new ImageIcon(dossierIcone + "DN.gif"));
-		
-		tabNombre[19][19].setIcon(new ImageIcon(dossierIcone + "DN.gif"));
-		
-		tabNombre[3][3].setIcon(new ImageIcon(dossierIcone + "TN.gif"));
-		tabNombre[5][5].setIcon(new ImageIcon(dossierIcone + "TN.gif"));
-		
-		tabNombre[7][9].setIcon(new ImageIcon(dossierIcone + "TN.gif"));
-		tabNombre[1][15].setIcon(new ImageIcon(dossierIcone + "TN.gif"));
-		
-		tabNombre[15][1].setIcon(new ImageIcon(dossierIcone + "TN.gif"));
-		
-		
-		tabNombre[17][2].setIcon(new ImageIcon(dossierIcone + "mur.gif"));
-		tabNombre[15][2].setIcon(new ImageIcon(dossierIcone + "mur.gif"));
-		tabNombre[13][2].setIcon(new ImageIcon(dossierIcone + "mur.gif"));
-		tabNombre[5][9].setIcon(new ImageIcon(dossierIcone + "mur.gif"));
-		tabNombre[8][0].setIcon(new ImageIcon(dossierIcone + "mur.gif"));
-		tabNombre[3][18].setIcon(new ImageIcon(dossierIcone + "mur.gif"));
+		InitCarte();
+	}
 	
+	private void InitCarte()
+	{
+		setIcon(chateau, JL_cases[1][3]);
+		setIcon(chateau, JL_cases[13][15]);
+		setCouleur(Color.BLUE, JL_cases[1][3]);
+		setCouleur(Color.RED, JL_cases[13][15]);
+		setTexte("1",JL_cases[1][3]);
+		setTexte("1",JL_cases[13][15]);
 		
-		tabNombre[0][2].setText("1");
-		tabNombre[0][2].setFont(font);
-		tabNombre[0][2].setForeground(new Color(255,255,255));
-		tabNombre[0][2].setHorizontalAlignment(JLabel.CENTER);
-		tabNombre[0][2].setVerticalAlignment(JLabel.CENTER);
-		
-		tabNombre[0][1].setText("1");
-		tabNombre[0][1].setFont(font);
-		tabNombre[0][1].setForeground(new Color(255,255,255));
-		tabNombre[0][1].setHorizontalAlignment(JLabel.CENTER);
-		tabNombre[0][1].setVerticalAlignment(JLabel.CENTER);
-		
-		
-		/*tab[0][0].setText("1");
-		tab[0][0].setFont(font);
-		tab[0][0].setForeground(new Color(255,255,255));
-		tab[0][0].setHorizontalAlignment(JLabel.CENTER);
-		tab[0][0].setVerticalAlignment(JLabel.CENTER);*/
+		 setImgTour(JL_cases[0][1]);
+		 setImgTour(JL_cases[0][15]);
+		 setImgTour(JL_cases[3][9]);
+		 setImgTour(JL_cases[0][11]);
+		 setImgTour(JL_cases[10][0]);
+		 setImgTour(JL_cases[3][3]);
+		 setImgTour(JL_cases[6][2]);
+		 setImgTour(JL_cases[3][1]);
+		 setImgTour(JL_cases[1][17]);
+		 setImgTour(JL_cases[2][14]);
+		 setImgTour(JL_cases[4][5]);
+		 setImgTour(JL_cases[5][13]);
+		 setImgTour(JL_cases[7][14]);
+		 setImgTour(JL_cases[8][11]);
+		 setImgTour(JL_cases[10][17]);
+		 setImgTour(JL_cases[11][5]);
+		 setImgTour(JL_cases[12][8]);
+		 setImgTour(JL_cases[13][10]);
+		 setImgTour(JL_cases[16][3]);
+		 setImgTour(JL_cases[17][17]);
+		 setImgTour(JL_cases[15][14]);
+	
+		setImgMontagne(JL_cases[0][0]);
+		setImgMontagne(JL_cases[0][4]);
+		setImgMontagne(JL_cases[0][6]);
+		setImgMontagne(JL_cases[0][7]);
+		setImgMontagne(JL_cases[0][8]);
+		setImgMontagne(JL_cases[0][12]);
+		setImgMontagne(JL_cases[1][5]);
+		setImgMontagne(JL_cases[1][11]);
+		setImgMontagne(JL_cases[1][14]);
+		setImgMontagne(JL_cases[1][15]);
+		setImgMontagne(JL_cases[2][1]);
+		setImgMontagne(JL_cases[2][4]);
+		setImgMontagne(JL_cases[2][7]);
+		setImgMontagne(JL_cases[2][9]);
+		setImgMontagne(JL_cases[2][17]);
+		setImgMontagne(JL_cases[3][7]);
+		setImgMontagne(JL_cases[3][10]);
+		setImgMontagne(JL_cases[3][12]);
+		setImgMontagne(JL_cases[3][14]);
+		setImgMontagne(JL_cases[3][15]);
+		setImgMontagne(JL_cases[4][8]);
+		setImgMontagne(JL_cases[4][12]);
+		setImgMontagne(JL_cases[4][13]);
+		setImgMontagne(JL_cases[5][1]);
+		setImgMontagne(JL_cases[5][12]);
+		setImgMontagne(JL_cases[6][7]);
+		setImgMontagne(JL_cases[6][8]);
+		setImgMontagne(JL_cases[6][15]);
+		setImgMontagne(JL_cases[7][2]);
+		setImgMontagne(JL_cases[7][3]);
+		setImgMontagne(JL_cases[8][1]);
+		setImgMontagne(JL_cases[8][2]);
+		setImgMontagne(JL_cases[8][3]);
+		setImgMontagne(JL_cases[8][4]);
+		setImgMontagne(JL_cases[8][5]);
+		setImgMontagne(JL_cases[8][6]);
+		setImgMontagne(JL_cases[8][14]);
+		setImgMontagne(JL_cases[8][15]);
+		setImgMontagne(JL_cases[8][16]);
+		setImgMontagne(JL_cases[9][0]);
+		setImgMontagne(JL_cases[9][9]);
+		setImgMontagne(JL_cases[9][10]);
+		setImgMontagne(JL_cases[9][14]);
+		setImgMontagne(JL_cases[11][1]);
+		setImgMontagne(JL_cases[12][3]);
+		setImgMontagne(JL_cases[12][4]);
+		setImgMontagne(JL_cases[12][5]);
+		setImgMontagne(JL_cases[12][12]);
+		setImgMontagne(JL_cases[12][13]);
+		setImgMontagne(JL_cases[12][14]);
+		setImgMontagne(JL_cases[13][0]);
+		setImgMontagne(JL_cases[13][6]);
+		setImgMontagne(JL_cases[13][7]);
+		setImgMontagne(JL_cases[14][6]);
+		setImgMontagne(JL_cases[15][3]);
+		setImgMontagne(JL_cases[15][12]);
+		setImgMontagne(JL_cases[16][12]);
+		setImgMontagne(JL_cases[17][0]);
+		setImgMontagne(JL_cases[17][5]);
+		setImgMontagne(JL_cases[17][6]);
+		setImgMontagne(JL_cases[17][7]);
+		setImgMontagne(JL_cases[17][12]);
+		setImgMontagne(JL_cases[14][17]);
+		setImgMontagne(JL_cases[15][17]);
+	}
+	
+	
+	private void setImgMontagne(JLabel position)
+	{
+		Color color1= new Color(110,110,110);
+		setIcon(montagne,position);
+		setCouleur(color1,position);
 	}
 
+	private void setImgTour(JLabel position)
+	{
+		Color color1= new Color(180,180,180);
+		setIcon(tour,position);
+		setCouleur(color1,position);
+		setTexte("40",position);
+	}
+	
+	private void setIcon(String element, JLabel position)
+	{
+	String image= dossierIcone + element;
+	position.setIcon(new ImageIcon(image));
+	position.setLayout(new FlowLayout(FlowLayout.CENTER));
+	}
+
+
+	private void setCouleur(Color couleur, JLabel position)
+	{
+	position.setBackground(couleur);		//carré rouge
+	}
+	
+	private void setTexte(String texte, JLabel position)
+	{
+        JLabel text = new JLabel(texte);
+        text.setFont(font);
+        text.setForeground(new Color(255,255,255));
+        text.setHorizontalAlignment(JLabel.CENTER);
+        text.setVerticalAlignment(JLabel.CENTER);
+        position.add(text);
+	}
 
 	// main pour pouvoir executer l'interface graphique
 	public static void main(String[] args)
