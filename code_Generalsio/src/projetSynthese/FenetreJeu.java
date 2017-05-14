@@ -29,7 +29,11 @@ public class FenetreJeu extends JFrame
 	private int NBRTOUR=22;
 	
 	private boolean tabCoord[][];
-
+	private int coordBase1[];
+	private int coordBase2[];
+	
+	private int tmp=0;
+	
 	Font font = new Font("Calibri",Font.CENTER_BASELINE,21);	//police écrite sur les cases
 	
 	//initialise la surface de jeu
@@ -52,7 +56,7 @@ public class FenetreJeu extends JFrame
 				JL_cases[colonne][ligne] = new JLabel(); // creation du JLabel
 				JP_Grille.add(JL_cases[colonne][ligne]); // ajouter au Panel
 				JL_cases[colonne][ligne].setOpaque(true);
-				JL_cases[colonne][ligne].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));	// encadre chaque case
+				JL_cases[colonne][ligne].setBorder(BorderFactory.createLineBorder(new Color(0,0,0), 2));	// encadre chaque case
 			}	
 		}
 		InitCarte();
@@ -61,9 +65,11 @@ public class FenetreJeu extends JFrame
 	
 	private void InitCarte()
 	{
+		coordBase1= new int[2];
+		coordBase2= new int[2];
 		
 		tabCoord = new boolean[18][18];	//tableau pour tester les cases occupées
-		
+	
 		for (int i=0; i<18; i++)
 		{
 			for (int j=0; j<18; j++)
@@ -71,21 +77,52 @@ public class FenetreJeu extends JFrame
 				tabCoord[i][j]=false;
 			}
 		}
-		
+
 		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
 		yAlea=(int) (Math.random()*((LIGNE-2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
 		tabCoord[xAlea][yAlea]=true;
+		coordBase1[0]=xAlea;
+		coordBase1[1]=yAlea;
 		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la première base dans la moitié supérieur de la carte
 		setCouleur(Color.BLUE, JL_cases[xAlea][yAlea]);
 		setTexte("1",JL_cases[xAlea][yAlea]);
+		JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
 		
 		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;		
 		yAlea=(int) (Math.random()*((LIGNE-1)-((LIGNE+2)/2))+((LIGNE+2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
 		tabCoord[xAlea][yAlea]=true;
+		coordBase2[0]=xAlea;
+		coordBase2[1]=yAlea;
 		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la deuxième base dans la moitié inférieur de la carte
 		setCouleur(Color.RED, JL_cases[xAlea][yAlea]);
 		setTexte("1",JL_cases[xAlea][yAlea]);
+		JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
 
+		//on génère un chemin vide en L d'une base à l'autre
+		if (coordBase1[0]>coordBase2[0])	
+		{
+			for (int i=coordBase1[0]-1; i>= coordBase2[0]; i--)
+			{
+				tabCoord[i][coordBase1[1]]=true;
+				tmp=i;
+			}
+		}
+		else 
+		{
+			for (int i=coordBase1[0]+1; i<= coordBase2[0]; i++)
+			{
+				tabCoord[i][coordBase1[1]]=true;
+				tmp=i;
+			}	
+		}
+
+		for (int i=coordBase1[1]+1; i< coordBase2[1]; i++)
+		{
+			tabCoord[tmp][i]=true;
+		}
+		
+		
+		
 		for (int i=0; i< NBRTOUR; i++)
 		{
 			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
