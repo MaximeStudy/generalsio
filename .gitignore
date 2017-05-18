@@ -1,10 +1,7 @@
-*target*
-*.jar
-*.war
-*.ear
-*.class
-
-# eclipse specific git ignore
+######################
+# Eclipse
+######################
+ 
 *.pydevproject
 .project
 .metadata
@@ -19,9 +16,6 @@ local.properties
 .classpath
 .settings/
 .loadpath
-
+/src/main/resources/rebel.xml
 # External tool builders
 .externalToolBuilders/
-
-# Locally stored "Eclipse launch configurations"
-*.launch
