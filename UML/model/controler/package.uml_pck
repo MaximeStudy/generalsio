@@ -1,7 +1,0 @@
-<?xml version='1.0' encoding='UTF-8' standalone='yes'?>
-<xmi:XMI xmlns:xmi='http://www.omg.org/spec/XMI/20110701' xmlns:uml='http://www.omg.org/spec/UML/20110701'>
- <documentation exporter='Oracle JDeveloper' exporterVersion='12.1.3.0.0'/>
- <uml:Package xmi:type='uml:Package' xmi:uuid='urn:uuid:41f19600-140a-459f-b1a9-e5f5088b1ef0'
-   name='controler'
-   visibility='public'/>
-</xmi:XMI>
