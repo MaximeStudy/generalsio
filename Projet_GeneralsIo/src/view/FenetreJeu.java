@@ -4,6 +4,7 @@ import java.lang.Math;
 import javax.swing.border.EtchedBorder;
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
  
 public class FenetreJeu extends JFrame
@@ -14,7 +15,7 @@ public class FenetreJeu extends JFrame
 	private JPanel JP_Grille = new JPanel(); 	// panel du bas ( grille )
 	private GridLayout GL_Matrice = new GridLayout(COLONNE,LIGNE); 	
 	
-	private String dossierIcone = "icone/";
+	private String dossierIcone = "Icone/";
 	
 	private int nbrAlea;
 	private int xAlea,yAlea;
@@ -26,19 +27,25 @@ public class FenetreJeu extends JFrame
 	private int NBRTOUR=22;
 	
 	private boolean tabCoord[][];
-
-	Font font = new Font("Calibri",Font.CENTER_BASELINE,21);	//police écrite sur les cases
+	private int coordBase1[];
+	private int coordBase2[];
+	
+	private int tmp=0;
+	
+	private GestionnaireEvenement gest = new GestionnaireEvenement();
+	
+	Font font = new Font("Calibri",Font.CENTER_BASELINE,21);	//police ï¿½crite sur les cases
 	
 	//initialise la surface de jeu
 	public FenetreJeu()
 	{
-		JL_cases = new JLabel[COLONNE][LIGNE];	 // création du tableau de JLabel
-		this.getContentPane().setLayout(null);   // créé bandeau vide
+		JL_cases = new JLabel[COLONNE][LIGNE];	 // crï¿½ation du tableau de JLabel
+		this.getContentPane().setLayout(null);   // crï¿½ï¿½ bandeau vide
 		this.setSize(new Dimension(1000, 800)); //Taille fenetre entiere
 		this.setTitle("Generalsio");			 //Titre
 
 		JP_Grille.setBounds(new Rectangle(150, 10, 700, 700));	// ajuste le JPannel dans la JFrame
-		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//créé une bordure autour du pannel
+		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//crï¿½ï¿½ une bordure autour du pannel
 		JP_Grille.setLayout(GL_Matrice);
 		this.add(JP_Grille);	
 
@@ -49,18 +56,20 @@ public class FenetreJeu extends JFrame
 				JL_cases[colonne][ligne] = new JLabel(); // creation du JLabel
 				JP_Grille.add(JL_cases[colonne][ligne]); // ajouter au Panel
 				JL_cases[colonne][ligne].setOpaque(true);
-				JL_cases[colonne][ligne].setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));	// encadre chaque case
+				JL_cases[colonne][ligne].setBorder(BorderFactory.createLineBorder(new Color(0,0,0), 2));	// encadre chaque case
+				JL_cases[colonne][ligne].addMouseListener(gest); // ajouter l'ï¿½ï¿½couteur aux
 			}	
 		}
 		InitCarte();
-		
 	}
 	
 	private void InitCarte()
 	{
+		coordBase1= new int[2];
+		coordBase2= new int[2];
 		
-		tabCoord = new boolean[18][18];	//tableau pour tester les cases occupées
-		
+		tabCoord = new boolean[18][18];	//tableau pour tester les cases occupï¿½es
+	
 		for (int i=0; i<18; i++)
 		{
 			for (int j=0; j<18; j++)
@@ -68,21 +77,52 @@ public class FenetreJeu extends JFrame
 				tabCoord[i][j]=false;
 			}
 		}
-		
+
 		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
 		yAlea=(int) (Math.random()*((LIGNE-2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
 		tabCoord[xAlea][yAlea]=true;
-		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la première base dans la moitié supérieur de la carte
+		coordBase1[0]=xAlea;
+		coordBase1[1]=yAlea;
+		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la premiï¿½re base dans la moitiï¿½ supï¿½rieur de la carte
 		setCouleur(Color.BLUE, JL_cases[xAlea][yAlea]);
 		setTexte("1",JL_cases[xAlea][yAlea]);
+		//JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
 		
 		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;		
 		yAlea=(int) (Math.random()*((LIGNE-1)-((LIGNE+2)/2))+((LIGNE+2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
 		tabCoord[xAlea][yAlea]=true;
-		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la deuxième base dans la moitié inférieur de la carte
+		coordBase2[0]=xAlea;
+		coordBase2[1]=yAlea;
+		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la deuxiï¿½me base dans la moitiï¿½ infï¿½rieur de la carte
 		setCouleur(Color.RED, JL_cases[xAlea][yAlea]);
 		setTexte("1",JL_cases[xAlea][yAlea]);
+		//JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
 
+		//on gï¿½nï¿½re un chemin vide en L d'une base ï¿½ l'autre
+		if (coordBase1[0]>coordBase2[0])	
+		{
+			for (int i=coordBase1[0]-1; i>= coordBase2[0]; i--)
+			{
+				tabCoord[i][coordBase1[1]]=true;
+				tmp=i;
+			}
+		}
+		else
+		{
+			for (int i=coordBase1[0]+1; i<= coordBase2[0]; i++)
+			{
+				tabCoord[i][coordBase1[1]]=true;
+				tmp=i;
+			}	
+		}
+
+		for (int i=coordBase1[1]+1; i< coordBase2[1]; i++)
+		{
+			tabCoord[tmp][i]=true;
+		}
+		
+		
+		
 		for (int i=0; i< NBRTOUR; i++)
 		{
 			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
@@ -140,7 +180,7 @@ public class FenetreJeu extends JFrame
 
 	private void setCouleur(Color couleur, JLabel position)
 	{
-	position.setBackground(couleur);		//carré rouge
+	position.setBackground(couleur);		//carrï¿½ rouge
 	}
 	
 	private void setTexte(String texte, JLabel position)
@@ -153,13 +193,46 @@ public class FenetreJeu extends JFrame
         position.add(text);
 	}
 
-	// main pour pouvoir executer l'interface graphique
-	public static void main(String[] args)
+	
+	private class GestionnaireEvenement extends MouseAdapter
 	{
-		FenetreJeu j = new FenetreJeu();
-		j.setVisible(true);							//rend la fenetre visible
-		j.setLocation(10, 15);						//centre la fenetre
-		j.setDefaultCloseOperation(EXIT_ON_CLOSE); // arrete l'execution a la fermeture
+		
+		private int CaseSelect[];
+		private int ligneClic;
+		private int colonneClic;
+		
+		
+		public void mouseClicked(MouseEvent eve)
+		{
+			CaseSelect = new int[2];
+			if (eve.getSource() instanceof JLabel) // donc on a cliquï¿½ sur un Label
+			{
+				for (int ligne = 0; ligne < COLONNE; ligne++)
+				{
+					
+					for (int colonne = 0; colonne < LIGNE; colonne++)
+					{
+						if (eve.getSource() == JL_cases[colonne][ligne])
+						{
+							System.out.println("Ligne = "+ ligne);
+							System.out.println("Colonne = "+ colonne);
+							System.out.println("Ligne ancienne = "+ ligneClic);
+							System.out.println("Colonne ancienne = "+ colonneClic);
 
+								JL_cases[ligneClic][colonneClic].setBorder(BorderFactory.createLineBorder(Color.black, 2));	// encadre case
+								
+							colonneClic= colonne;
+							ligneClic = ligne;
+							JL_cases[colonneClic][ligneClic].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
+							CaseSelect[0]=ligneClic;
+							CaseSelect[1]=colonneClic;
+						}
+					}
+				}
+			}
+		}
+	
 	}
+	
 }
+
