@@ -1,10 +1,12 @@
 package model;
 
+import java.awt.Color;
+
 public class Plaine extends Element{
 	  /**
      * @attribute
      */
-    private Integer nombreSoldats;
+    protected int nombreSoldats;
 
     /**
      * @attribute
@@ -14,12 +16,12 @@ public class Plaine extends Element{
     /**
      * @attribute
      */
-    Integer vitesseCreaSoldat;
+    int vitesseCreaSoldat;
 
     /**
      * @attribute
      */
-    private Integer couleur;
+    private Color couleur = Color.white;
 
     public Plaine(int x,int y)  {
         super(x,y);
@@ -48,13 +50,14 @@ public class Plaine extends Element{
         return vitesseCreaSoldat;
     }
 
-    public void setCouleur(Integer couleur) {
+    public void setCouleur(Color couleur) {
         this.couleur = couleur;
     }
 
-    public Integer getCouleur() {
+    public Color getCouleur() {
         return couleur;
     }
+    
     public int prendreSoldats(){
         int nb=this.getNombreSoldats();
         this.setNombreSoldats(1);
@@ -64,6 +67,14 @@ public class Plaine extends Element{
 
     public void incrementerSoldat() {
         this.nombreSoldats++;
+    }
+    
+    public String  getNomElement() {
+    	return "plaine";
+    }
+    
+    public int getSoldats() { 
+    	return nombreSoldats;
     }
 }
 

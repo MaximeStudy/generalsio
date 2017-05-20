@@ -1,7 +1,12 @@
 package view;
 
 import java.lang.Math;
+import java.util.ListIterator;
+
 import javax.swing.border.EtchedBorder;
+
+import controler.G_Element;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -19,9 +24,9 @@ public class FenetreJeu extends JFrame implements KeyListener
 	private int nbJoueur=2;
 	private int nbrAlea;
 	private int xAlea,yAlea;
-	private String tour="tour.png";			
-	private String chateau="chateau.png";
-	private String montagne="montagne.png";
+	private String base="base";			
+	private String chateau="chateau";
+	private String montagne="montagne";
 	
 	private int NBRMONTAGNE=65;
 	private int NBRTOUR=22;
@@ -66,97 +71,76 @@ public class FenetreJeu extends JFrame implements KeyListener
 		addKeyListener(this);
 	}
 	
-	private void InitCarte()
-	{
-		coordBase1= new int[2];
-		coordBase2= new int[2];
-		
-		tabCoord = new boolean[18][18];	//tableau pour tester les cases occup�es
-	
-		for (int i=0; i<18; i++)
-		{
-			for (int j=0; j<18; j++)
-			{
-				tabCoord[i][j]=false;
-			}
-		}
-
-		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-		yAlea=(int) (Math.random()*((LIGNE-2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
-		tabCoord[xAlea][yAlea]=true;
-		coordBase1[0]=xAlea;
-		coordBase1[1]=yAlea;
-		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la premi�re base dans la moiti� sup�rieur de la carte
-		setCouleur(Color.BLUE, JL_cases[xAlea][yAlea]);
-		setTexte("1",JL_cases[xAlea][yAlea]);
-		//JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
-		
-		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;		
-		yAlea=(int) (Math.random()*((LIGNE-1)-((LIGNE+2)/2))+((LIGNE+2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
-		tabCoord[xAlea][yAlea]=true;
-		coordBase2[0]=xAlea;
-		coordBase2[1]=yAlea;
-		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la deuxi�me base dans la moiti� inf�rieur de la carte
-		setCouleur(Color.RED, JL_cases[xAlea][yAlea]);
-		setTexte("1",JL_cases[xAlea][yAlea]);
-		//JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
-
-		//on genre un chemin vide en L d'une base a l'autre
-		if (coordBase1[0]>coordBase2[0])	
-		{
-			for (int i=coordBase1[0]-1; i>= coordBase2[0]; i--)
-			{
-				tabCoord[i][coordBase1[1]]=true;
-				tmp=i;
-			}
-		}
-		else
-		{
-			for (int i=coordBase1[0]+1; i<= coordBase2[0]; i++)
-			{
-				tabCoord[i][coordBase1[1]]=true;
-				tmp=i;
-			}	
-		}
-
-		for (int i=coordBase1[1]+1; i< coordBase2[1]; i++)
-		{
-			tabCoord[tmp][i]=true;
-		}
-		
-		
-		
-		for (int i=0; i< NBRTOUR; i++)
-		{
-			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;}
-			if (tabCoord[xAlea][yAlea] == false)
-			{
-				setImgTour(JL_cases[xAlea][yAlea]);
-				tabCoord[xAlea][yAlea]=true;		
-			}
-			else
-			{
-				i--;
-			}
-		}
-		
-		for (int i=0; i< NBRMONTAGNE; i++)
-		{
-			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-			if (tabCoord[xAlea][yAlea] == false)
-			{
-				setImgMontagne(JL_cases[xAlea][yAlea]);
-				tabCoord[xAlea][yAlea]=true;
-			}
-			else
-			{
-				i--;
-			}
-		}
-		//lance l'ecoute des joueurs
+	private void InitCarte()	{
+				G_Element.remplirPlateau();
+				for(int i=0;i<18;i++) {
+					for(int j=0;j<18;j++) {
+						System.out.println("x :"+G_Element.getElement(i, j).getX()+" y :"+G_Element.getElement(i, j).getY()+" nomElem :"+G_Element.getElement(i, j).getNomElement());
+						//affiche les elements sur la carte
+						setIcon(G_Element.getElement(i, j).getNomElement(), JL_cases[i][j]);
+						setCouleur(G_Element.getElement(i, j).getCouleur(), JL_cases[i][j]);
+						//on veut pas afficher les soldats de la montagne
+						if(!G_Element.getElement(i, j).getNomElement().equals("montagne"))
+							setTexte(Integer.toString(G_Element.getElement(i, j).getSoldats()),JL_cases[i][j]);
+					}
+				}
 	}
+		
+//		//on genre un chemin vide en L d'une base a l'autre
+//		if (coordBase1[0]>coordBase2[0])	
+//		{
+//			for (int i=coordBase1[0]-1; i>= coordBase2[0]; i--)
+//			{
+//				tabCoord[i][coordBase1[1]]=true;
+//				tmp=i;
+//			}
+//		}
+//		else
+//		{
+//			for (int i=coordBase1[0]+1; i<= coordBase2[0]; i++)
+//			{
+//				tabCoord[i][coordBase1[1]]=true;
+//				tmp=i;
+//			}	
+//		}
+//
+//		for (int i=coordBase1[1]+1; i< coordBase2[1]; i++)
+//		{
+//			tabCoord[tmp][i]=true;
+//		}
+//
+//
+//
+//		for (int i=0; i< NBRTOUR; i++)
+//		{
+//			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
+//			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;}
+//			if (tabCoord[xAlea][yAlea] == false)
+//			{
+//				setImgTour(JL_cases[xAlea][yAlea]);
+//				tabCoord[xAlea][yAlea]=true;		
+//			}
+//			else
+//			{
+//				i--;
+//			}
+//		}
+//
+//		for (int i=0; i< NBRMONTAGNE; i++)
+//		{
+//			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
+//			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;
+//			if (tabCoord[xAlea][yAlea] == false)
+//			{
+//				setImgMontagne(JL_cases[xAlea][yAlea]);
+//				tabCoord[xAlea][yAlea]=true;
+//			}
+//			else
+//			{
+//				i--;
+//			}
+//		}
+
 	
 	private void setImgMontagne(JLabel position)
 	{
@@ -165,20 +149,21 @@ public class FenetreJeu extends JFrame implements KeyListener
 		setCouleur(color1,position);
 	}
 
-	private void setImgTour(JLabel position)
+	private void setImgChateau(JLabel position)
 	{
 		Color color1= new Color(180,180,180);
-		setIcon(tour,position);
+		setIcon(chateau,position);
 		setCouleur(color1,position);
 		nbrAlea=(int) (Math.random()*(16)+40);
 		setTexte(Integer.toString(nbrAlea),position);
 	}
 	
 	private void setIcon(String element, JLabel position)
-	{
-	String image= dossierIcone + element;
-	position.setIcon(new ImageIcon(image));
-	position.setLayout(new FlowLayout(FlowLayout.CENTER));
+		{
+		String image= dossierIcone + element+".png";
+		System.out.println(image);
+		position.setIcon(new ImageIcon(image));
+		position.setLayout(new FlowLayout(FlowLayout.CENTER));
 	}
 
 	

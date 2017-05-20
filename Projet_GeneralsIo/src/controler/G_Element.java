@@ -1,5 +1,6 @@
 package controler;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Collection;
 
@@ -17,12 +18,16 @@ public class G_Element {
     /**
      * @associates <{uml.Element}>
      */
-    private static List<Element> mesElements;
+    private static List<Element> mesElements=new ArrayList<Element>();
     
     public static List<Element> getTousLesElements() {
         return mesElements;
     }
     
+    private static int nombreMontagne=65;
+	private static int nombreChateau=22;
+	private static Color colJ1=Color.BLUE;
+	private static Color colJ2=Color.RED;
 
     /* Renvoie la liste d'elements qui se situe autour du personnage */
     public static List<Element> getElementAutourPerso(Element e) {
@@ -69,43 +74,70 @@ public class G_Element {
 		{
 			for(int j=0;j<18;j++)
 			{
-				ajouterPlaine(i,j);
+				G_Element.ajouterPlaine(i, j);
 			}
 		}
-    	
-		/*Base b1=new Base();
-		coordBase1= new int[2];
-		coordBase2= new int[2];
+				
+    	/* Cree les deux bases */
+		int xAlea=(int) (Math.random()*(18));  //Math.random()*( max - mini + 1 ) ) + mini;
+		int yAlea=(int) (Math.random()*((18-2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
 		
-		tabCoord = new boolean[18][18];	//tableau pour tester les cases occupï¿½es
-	
-		for (int i=0; i<18; i++)
+		supprimerElement(getElement(xAlea,yAlea));
+		G_Element.ajouterBase(xAlea, yAlea,colJ1);
+		
+		xAlea=(int) (Math.random()*(18));  //Math.random()*( max - mini + 1 ) ) + mini;		
+		yAlea=(int) (Math.random()*((18-1)-((18+2)/2))+((18+2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
+		
+		supprimerElement(getElement(xAlea,yAlea));
+		G_Element.ajouterBase(xAlea, yAlea,colJ2);
+		
+    	/* Cree les differents chateau */
+		for (int i=0; i< nombreChateau; i++)
 		{
-			for (int j=0; j<18; j++)
+			xAlea=(int) (Math.random()*(18));  //Math.random()*( max - mini + 1 ) ) + mini;
+			yAlea=(int) (Math.random()*(18));  //Math.random()*( max - mini + 1 ) ) + mini;}
+			if(G_Element.getElement(xAlea, yAlea).getNomElement().equals("plaine"))
 			{
-				tabCoord[i][j]=false;
+				G_Element.supprimerElement(G_Element.getElement(xAlea, yAlea));
+				G_Element.ajouterChateau(xAlea, yAlea);
 			}
 		}
-
-		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-		yAlea=(int) (Math.random()*((LIGNE-2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
-		tabCoord[xAlea][yAlea]=true;
-		coordBase1[0]=xAlea;
-		coordBase1[1]=yAlea;
-		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la premiï¿½re base dans la moitiï¿½ supï¿½rieur de la carte
-		setCouleur(Color.BLUE, JL_cases[xAlea][yAlea]);
-		setTexte("1",JL_cases[xAlea][yAlea]);
-		//JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
+		//TODO revoir cette partie
+    	/* Cree les differentes montagne */
+		for (int i=0; i< nombreMontagne; i++)
+		{
+			xAlea=(int) (Math.random()*(18));  //Math.random()*( max - mini + 1 ) ) + mini;
+			yAlea=(int) (Math.random()*(18));  //Math.random()*( max - mini + 1 ) ) + mini;}
+			if(G_Element.getElement(xAlea, yAlea).getNomElement().equals("plaine"))
+			{
+				G_Element.supprimerElement(G_Element.getElement(xAlea, yAlea));
+				G_Element.ajouterMontagne(xAlea,yAlea);
+			}
+		}
 		
-		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;		
-		yAlea=(int) (Math.random()*((LIGNE-1)-((LIGNE+2)/2))+((LIGNE+2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
-		tabCoord[xAlea][yAlea]=true;
-		coordBase2[0]=xAlea;
-		coordBase2[1]=yAlea;
-		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la deuxiï¿½me base dans la moitiï¿½ infï¿½rieur de la carte
-		setCouleur(Color.RED, JL_cases[xAlea][yAlea]);
-		setTexte("1",JL_cases[xAlea][yAlea]);
-		//JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
+		if(G_Element.getBase(colJ1).getX()>G_Element.getBase(colJ1).getX())
+		{
+			for (int i=G_Element.getBase(colJ1).getX()-1; i>= G_Element.getBase(colJ2).getX(); i--)
+			{
+				Element tmp=G_Element.getElement(i, G_Element.getBase(colJ1).getY());
+				if (G_Element.getElement(i, G_Element.getBase(colJ1).getY()).getNomElement().equals("plaine")) {
+					G_Element.supprimerElement(G_Element.getElement(i, G_Element.getBase(colJ1).getY()));
+					G_Element.ajouterPlaine(i,G_Element.getBase(colJ1).getY());
+				}
+			}
+		}
+		else {
+			for (int i=G_Element.getBase(colJ1).getX()+1; i<= G_Element.getBase(colJ2).getX(); i++)
+			{
+				if (!G_Element.getElement(i, G_Element.getBase(colJ1).getY()).getNomElement().equals("plaine")) {
+					G_Element.supprimerElement(G_Element.getElement(i, G_Element.getBase(colJ1).getY()));
+					G_Element.ajouterPlaine(i,G_Element.getBase(colJ1).getY());
+				}
+				
+			}
+		}
+    /*
+		
 
 		//on genre un chemin vide en L d'une base a l'autre
 		if (coordBase1[0]>coordBase2[0])	
@@ -132,38 +164,21 @@ public class G_Element {
 		
 		
 		
-		for (int i=0; i< NBRTOUR; i++)
-		{
-			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;}
-			if (tabCoord[xAlea][yAlea] == false)
-			{
-				setImgTour(JL_cases[xAlea][yAlea]);
-				tabCoord[xAlea][yAlea]=true;		
-			}
-			else
-			{
-				i--;
-			}
-		}
 		
-		for (int i=0; i< NBRMONTAGNE; i++)
-		{
-			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-			if (tabCoord[xAlea][yAlea] == false)
-			{
-				setImgMontagne(JL_cases[xAlea][yAlea]);
-				tabCoord[xAlea][yAlea]=true;
-			}
-			else
-			{
-				i--;
-			}
 		} */
 		//lance l'ecoute des joueurs
 
     	return null;
+    }
+    
+    public static Element getBase(Color c) {
+    	Element e1=null;
+    	for(int i=0;i<getTousLesElements().size();i++)
+    	{
+    		if(getTousLesElements().get(i).getNomElement().equals("base") && getTousLesElements().get(i).getCouleur()==c)
+    			e1=getTousLesElements().get(i);
+    	}
+        return e1;
     }
     
     /* Recupère l'element de en-dessus par rapport à la position e */
@@ -260,9 +275,9 @@ public class G_Element {
     	mesElements.add(new Plaine(x,y));
     }
     
-    public static void ajouterBase(int x,int y)
+    public static void ajouterBase(int x,int y, Color c)
     {
-    	mesElements.add(new Base(x,y));
+    	mesElements.add(new Base(x,y,c));
     }
     
     public static void ajouterChateau(int x,int y)
@@ -275,6 +290,8 @@ public class G_Element {
     	mesElements.add(new Montagne(x,y));
     }
 
-    
+    public static void supprimerElement(Element e) {
+    	getTousLesElements().remove(e);
+    }
    
 }

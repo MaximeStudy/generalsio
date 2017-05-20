@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Color;
+
 public abstract class Element {
     /**
      * @attribute
@@ -14,8 +16,8 @@ public abstract class Element {
     /**
      * @attribute
      */
-    private Integer x=0;
-
+    private Integer x;
+    
     /**
      * @attribute
      */
@@ -58,6 +60,14 @@ public abstract class Element {
     public Boolean getEstFranchissable() {
         return estFranchissable;
     }
+    
+    public abstract String getNomElement();
+    
+    public abstract Color getCouleur() ;
+    
+    public abstract int getSoldats() ;
+
+
 
     
 }
