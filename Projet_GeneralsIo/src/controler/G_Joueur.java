@@ -28,6 +28,13 @@ public class G_Joueur {
     	//TODO
     	return null;
     }
+    
+    public static void creationJoueur()
+    {
+    	
+    	
+    }
+    
 
     public static void tuerJoueur(Integer id) {
     }

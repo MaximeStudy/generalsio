@@ -39,7 +39,7 @@ public class Joueur {
         this.id = id;
     }
 
-    public Integer getId() {
+    public long getId() {
         return id;
     }
 

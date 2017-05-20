@@ -6,6 +6,10 @@ import java.util.Collection;
 import java.util.List;
 
 import model.Joueur;
+import model.Montagne;
+import model.Plaine;
+import model.Base;
+import model.Chateau;
 import model.Element;
 
 public class G_Element {
@@ -60,6 +64,104 @@ public class G_Element {
     /* Foncton permettant de remplir le plateau */
     public static Element remplirPlateau() {
     	//TODO
+    	/* Rempli le plateau avec des plaines */
+    	for(int i=0;i<18;i++)
+		{
+			for(int j=0;j<18;j++)
+			{
+				ajouterPlaine(i,j);
+			}
+		}
+    	
+		/*Base b1=new Base();
+		coordBase1= new int[2];
+		coordBase2= new int[2];
+		
+		tabCoord = new boolean[18][18];	//tableau pour tester les cases occupï¿½es
+	
+		for (int i=0; i<18; i++)
+		{
+			for (int j=0; j<18; j++)
+			{
+				tabCoord[i][j]=false;
+			}
+		}
+
+		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
+		yAlea=(int) (Math.random()*((LIGNE-2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
+		tabCoord[xAlea][yAlea]=true;
+		coordBase1[0]=xAlea;
+		coordBase1[1]=yAlea;
+		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la premiï¿½re base dans la moitiï¿½ supï¿½rieur de la carte
+		setCouleur(Color.BLUE, JL_cases[xAlea][yAlea]);
+		setTexte("1",JL_cases[xAlea][yAlea]);
+		//JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
+		
+		xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;		
+		yAlea=(int) (Math.random()*((LIGNE-1)-((LIGNE+2)/2))+((LIGNE+2)/2));  //Math.random()*( max - mini + 1 ) ) + mini;
+		tabCoord[xAlea][yAlea]=true;
+		coordBase2[0]=xAlea;
+		coordBase2[1]=yAlea;
+		setIcon(chateau, JL_cases[xAlea][yAlea]);  // on pop la deuxiï¿½me base dans la moitiï¿½ infï¿½rieur de la carte
+		setCouleur(Color.RED, JL_cases[xAlea][yAlea]);
+		setTexte("1",JL_cases[xAlea][yAlea]);
+		//JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
+
+		//on genre un chemin vide en L d'une base a l'autre
+		if (coordBase1[0]>coordBase2[0])	
+		{
+			for (int i=coordBase1[0]-1; i>= coordBase2[0]; i--)
+			{
+				tabCoord[i][coordBase1[1]]=true;
+				tmp=i;
+			}
+		}
+		else
+		{
+			for (int i=coordBase1[0]+1; i<= coordBase2[0]; i++)
+			{
+				tabCoord[i][coordBase1[1]]=true;
+				tmp=i;
+			}	
+		}
+
+		for (int i=coordBase1[1]+1; i< coordBase2[1]; i++)
+		{
+			tabCoord[tmp][i]=true;
+		}
+		
+		
+		
+		for (int i=0; i< NBRTOUR; i++)
+		{
+			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
+			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;}
+			if (tabCoord[xAlea][yAlea] == false)
+			{
+				setImgTour(JL_cases[xAlea][yAlea]);
+				tabCoord[xAlea][yAlea]=true;		
+			}
+			else
+			{
+				i--;
+			}
+		}
+		
+		for (int i=0; i< NBRMONTAGNE; i++)
+		{
+			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
+			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;
+			if (tabCoord[xAlea][yAlea] == false)
+			{
+				setImgMontagne(JL_cases[xAlea][yAlea]);
+				tabCoord[xAlea][yAlea]=true;
+			}
+			else
+			{
+				i--;
+			}
+		} */
+		//lance l'ecoute des joueurs
 
     	return null;
     }
@@ -152,11 +254,27 @@ public class G_Element {
         return res;
     }
     
-    /* Création d'un element aléatoire*/
-    public static Element elementAlea() {
-    	//TODO
-    	return null;
+    
+    public static void ajouterPlaine(int x,int y)
+    {
+    	mesElements.add(new Plaine(x,y));
+    }
+    
+    public static void ajouterBase(int x,int y)
+    {
+    	mesElements.add(new Base(x,y));
+    }
+    
+    public static void ajouterChateau(int x,int y)
+    {
+    	mesElements.add(new Chateau(x,y));
+    }
+    
+    public static void ajouterMontagne(int x,int y)
+    {
+    	mesElements.add(new Montagne(x,y));
     }
 
+    
    
 }

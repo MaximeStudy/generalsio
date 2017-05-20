@@ -7,7 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 
  
-public class FenetreJeu extends JFrame
+public class FenetreJeu extends JFrame implements KeyListener
 {
 	private int COLONNE=18,LIGNE=18;
 	
@@ -16,7 +16,7 @@ public class FenetreJeu extends JFrame
 	private GridLayout GL_Matrice = new GridLayout(COLONNE,LIGNE); 	
 	
 	private String dossierIcone = "Icone/";
-	
+	private int nbJoueur=2;
 	private int nbrAlea;
 	private int xAlea,yAlea;
 	private String tour="tour.png";			
@@ -34,7 +34,7 @@ public class FenetreJeu extends JFrame
 	
 	private GestionnaireEvenement gest = new GestionnaireEvenement();
 	
-	Font font = new Font("Calibri",Font.CENTER_BASELINE,21);	//police �crite sur les cases
+	Font font = new Font("Calibri",Font.CENTER_BASELINE,21);	//police ecrite sur les cases
 	
 	//initialise la surface de jeu
 	public FenetreJeu()
@@ -61,6 +61,9 @@ public class FenetreJeu extends JFrame
 			}	
 		}
 		InitCarte();
+		
+		//permet de lancer le KeyListener
+		addKeyListener(this);
 	}
 	
 	private void InitCarte()
@@ -98,7 +101,7 @@ public class FenetreJeu extends JFrame
 		setTexte("1",JL_cases[xAlea][yAlea]);
 		//JL_cases[xAlea][yAlea].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
 
-		//on g�n�re un chemin vide en L d'une base � l'autre
+		//on genre un chemin vide en L d'une base a l'autre
 		if (coordBase1[0]>coordBase2[0])	
 		{
 			for (int i=coordBase1[0]-1; i>= coordBase2[0]; i--)
@@ -151,7 +154,8 @@ public class FenetreJeu extends JFrame
 			{
 				i--;
 			}
-		}		
+		}
+		//lance l'ecoute des joueurs
 	}
 	
 	private void setImgMontagne(JLabel position)
@@ -177,10 +181,12 @@ public class FenetreJeu extends JFrame
 	position.setLayout(new FlowLayout(FlowLayout.CENTER));
 	}
 
-
+	
+	
+	
 	private void setCouleur(Color couleur, JLabel position)
 	{
-	position.setBackground(couleur);		//carr� rouge
+		position.setBackground(couleur);		//carr� rouge
 	}
 	
 	private void setTexte(String texte, JLabel position)
@@ -205,7 +211,7 @@ public class FenetreJeu extends JFrame
 		public void mouseClicked(MouseEvent eve)
 		{
 			CaseSelect = new int[2];
-			if (eve.getSource() instanceof JLabel) // donc on a cliqu� sur un Label
+			if (eve.getSource() instanceof JLabel) // donc on a clique sur un Label
 			{
 				for (int ligne = 0; ligne < COLONNE; ligne++)
 				{
@@ -233,6 +239,71 @@ public class FenetreJeu extends JFrame
 		}
 	
 	}
+	
+	public void encadrer(JLabel jl, Color c)
+	{			
+		jl.setBorder(BorderFactory.createLineBorder(c, 4));	// encadre case
+	}
+
+	 @Override
+	 public void keyTyped(KeyEvent e) {
+     	
+     }
+
+	 @Override
+     public void keyPressed(KeyEvent e) {
+         
+     }
+	 
+	 @Override
+     public void keyReleased(KeyEvent e) {
+		 //TODO le mettre dans un thread
+		 int keyCode = e.getKeyCode();
+         switch( keyCode ) { 
+             case KeyEvent.VK_UP:
+                 System.out.println("Up 1");
+                 encadrer(JL_cases[coordBase1[0]][coordBase1[1]],Color.cyan);
+                 break;
+             case KeyEvent.VK_DOWN:
+                 // handle down 
+                 System.out.println("Down 1");
+
+                 break;
+             case KeyEvent.VK_LEFT:
+                 // handle left
+                 System.out.println("Left 1");
+
+                 break;
+             case KeyEvent.VK_RIGHT :
+                 // handle right
+                 System.out.println("Right 1");
+
+                 break;
+          }
+         
+         switch( keyCode ) { 
+         case KeyEvent.VK_Z:
+             System.out.println("Up 2");
+             encadrer(JL_cases[coordBase2[0]][coordBase2[1]], Color.orange);
+             
+             break;
+         case KeyEvent.VK_S:
+             // handle down 
+             System.out.println("Down 2");
+
+             break;
+         case KeyEvent.VK_Q:
+             // handle left
+             System.out.println("Left 2");
+
+             break;
+         case KeyEvent.VK_D :
+             // handle right
+             System.out.println("Right 2");
+
+             break;
+      }
+     }
 	
 }
 
