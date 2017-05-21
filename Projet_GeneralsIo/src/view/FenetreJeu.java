@@ -75,7 +75,7 @@ public class FenetreJeu extends JFrame implements KeyListener
 				G_Element.remplirPlateau();
 				for(int i=0;i<18;i++) {
 					for(int j=0;j<18;j++) {
-						System.out.println("x :"+G_Element.getElement(i, j).getX()+" y :"+G_Element.getElement(i, j).getY()+" nomElem :"+G_Element.getElement(i, j).getNomElement());
+						//System.out.println("x :"+G_Element.getElement(i, j).getX()+" y :"+G_Element.getElement(i, j).getY()+" nomElem :"+G_Element.getElement(i, j).getNomElement());
 						//affiche les elements sur la carte
 						setIcon(G_Element.getElement(i, j).getNomElement(), JL_cases[i][j]);
 						setCouleur(G_Element.getElement(i, j).getCouleur(), JL_cases[i][j]);
@@ -161,7 +161,7 @@ public class FenetreJeu extends JFrame implements KeyListener
 	private void setIcon(String element, JLabel position)
 		{
 		String image= dossierIcone + element+".png";
-		System.out.println(image);
+		//System.out.println(image);
 		position.setIcon(new ImageIcon(image));
 		position.setLayout(new FlowLayout(FlowLayout.CENTER));
 	}
@@ -205,10 +205,10 @@ public class FenetreJeu extends JFrame implements KeyListener
 					{
 						if (eve.getSource() == JL_cases[colonne][ligne])
 						{
-							System.out.println("Ligne = "+ ligne);
-							System.out.println("Colonne = "+ colonne);
-							System.out.println("Ligne ancienne = "+ ligneClic);
-							System.out.println("Colonne ancienne = "+ colonneClic);
+//							System.out.println("Ligne = "+ ligne);
+//							System.out.println("Colonne = "+ colonne);
+//							System.out.println("Ligne ancienne = "+ ligneClic);
+//							System.out.println("Colonne ancienne = "+ colonneClic);
 
 								JL_cases[ligneClic][colonneClic].setBorder(BorderFactory.createLineBorder(Color.black, 2));	// encadre case
 								

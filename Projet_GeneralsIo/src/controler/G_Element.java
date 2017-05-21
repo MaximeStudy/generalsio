@@ -114,59 +114,44 @@ public class G_Element {
 				G_Element.ajouterMontagne(xAlea,yAlea);
 			}
 		}
-		
-		if(G_Element.getBase(colJ1).getX()>G_Element.getBase(colJ1).getX())
+				
+		//on genre un chemin vide en L d'une base a l'autre
+		if(G_Element.getBase(colJ1).getX()>G_Element.getBase(colJ2).getX())
 		{
 			for (int i=G_Element.getBase(colJ1).getX()-1; i>= G_Element.getBase(colJ2).getX(); i--)
 			{
 				Element tmp=G_Element.getElement(i, G_Element.getBase(colJ1).getY());
-				if (G_Element.getElement(i, G_Element.getBase(colJ1).getY()).getNomElement().equals("plaine")) {
-					G_Element.supprimerElement(G_Element.getElement(i, G_Element.getBase(colJ1).getY()));
-					G_Element.ajouterPlaine(i,G_Element.getBase(colJ1).getY());
-				}
-			}
-		}
-		else {
-			for (int i=G_Element.getBase(colJ1).getX()+1; i<= G_Element.getBase(colJ2).getX(); i++)
-			{
-				if (!G_Element.getElement(i, G_Element.getBase(colJ1).getY()).getNomElement().equals("plaine")) {
+				if (!tmp.getNomElement().equals("plaine")) {
 					G_Element.supprimerElement(G_Element.getElement(i, G_Element.getBase(colJ1).getY()));
 					G_Element.ajouterPlaine(i,G_Element.getBase(colJ1).getY());
 				}
 				
 			}
 		}
-    /*
-		
-
-		//on genre un chemin vide en L d'une base a l'autre
-		if (coordBase1[0]>coordBase2[0])	
-		{
-			for (int i=coordBase1[0]-1; i>= coordBase2[0]; i--)
-			{
-				tabCoord[i][coordBase1[1]]=true;
-				tmp=i;
-			}
-		}
 		else
 		{
-			for (int i=coordBase1[0]+1; i<= coordBase2[0]; i++)
+			for (int i=G_Element.getBase(colJ1).getX()+1; i<=G_Element.getBase(colJ2).getX(); i++)
 			{
-				tabCoord[i][coordBase1[1]]=true;
-				tmp=i;
-			}	
+				Element tmp=G_Element.getElement(i, G_Element.getBase(colJ1).getY());
+				
+				if (!tmp.getNomElement().equals("plaine")) {
+					G_Element.supprimerElement(G_Element.getElement(i, G_Element.getBase(colJ1).getY()));
+					G_Element.ajouterPlaine(i,G_Element.getBase(colJ1).getY());
+				}
+			}
 		}
+		
+    
+		//chemin vertical du L
+		for (int i=G_Element.getBase(colJ1).getY()+1; i<G_Element.getBase(colJ2).getY(); i++)
+			{
+				Element tmp=G_Element.getElement(G_Element.getBase(colJ2).getX(), i);
 
-		for (int i=coordBase1[1]+1; i< coordBase2[1]; i++)
-		{
-			tabCoord[tmp][i]=true;
+				if (!tmp.getNomElement().equals("plaine")) {
+					G_Element.supprimerElement(G_Element.getElement(G_Element.getBase(colJ2).getX(),i));
+					G_Element.ajouterPlaine(G_Element.getBase(colJ2).getX(),i);
+				}
 		}
-		
-		
-		
-		
-		} */
-		//lance l'ecoute des joueurs
 
     	return null;
     }

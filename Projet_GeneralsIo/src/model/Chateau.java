@@ -10,5 +10,4 @@ public class Chateau extends Plaine {
     public String getNomElement() {
     	return "chateau";
     }
-
 }
