@@ -213,6 +213,7 @@ public class FenetreJeu extends JFrame implements KeyListener
           }
          
 		 encadrer(JL_cases[G_Joueur.getJoueur(Color.BLUE).getEstSur().getX()][G_Joueur.getJoueur(Color.BLUE).getEstSur().getY()],Color.CYAN,5);
+		 
 		 encadrer(JL_cases[G_Joueur.getJoueur(Color.RED).getEstSur().getX()][G_Joueur.getJoueur(Color.RED).getEstSur().getY()],Color.BLACK,2);
          switch( keyCode ) { 
          case KeyEvent.VK_Z:

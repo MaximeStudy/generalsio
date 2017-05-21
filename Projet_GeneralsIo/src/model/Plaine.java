@@ -75,6 +75,11 @@ public class Plaine extends Element{
     public int getSoldats() { 
     	return nombreSoldats;
     }
+    public Boolean getEstFranchissable() {
+    	return true;
+    }
+
+    
 }
 
 

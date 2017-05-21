@@ -21,8 +21,6 @@ public abstract class Element {
     /**
      * @attribute
      */
-    private Boolean estFranchissable;
-
 
     public Element(Integer x, Integer y) {
         this.x=x;
@@ -53,13 +51,7 @@ public abstract class Element {
         return x;
     }
 
-    public void setEstFranchissable(Boolean estFranchissable) {
-        this.estFranchissable = estFranchissable;
-    }
-
-    public Boolean getEstFranchissable() {
-        return estFranchissable;
-    }
+    public abstract Boolean getEstFranchissable();
     
     public abstract String getNomElement();
     

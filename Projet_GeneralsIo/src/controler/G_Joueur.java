@@ -42,7 +42,9 @@ public class G_Joueur {
     
     /* Change la postion du personnage */
     public static void deplacerPers(Joueur j, Element e) {
-    	j.setEstSur(e);
+        if (e.getEstFranchissable()) { 
+        	j.setEstSur(e);
+        }
     }
     
     public static List<Joueur> getListeJoueur() {

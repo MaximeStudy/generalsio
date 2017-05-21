@@ -211,7 +211,7 @@ public class G_Element {
     /* Recupère l'element de en-bas à droite par rapport à la position e */
     public static Element getElementBasDroite(Element e) {
         Element e1 = getElement(e.getX() + 1, e.getY() + 1);
-        if (e1 == null) {
+        if (e1 == null ) {
             e1 = e;
         }
         return e1;
@@ -220,7 +220,7 @@ public class G_Element {
     /* Recupère l'element de en-haut à gauche par rapport à la position e */
     public static Element getElementHautGauche(Element e) {
     	 Element e1 = getElement(e.getX() -1, e.getY() -1);
-         if (e1 == null) {
+         if (e1 == null ) {
              e1 = e;
          }
          return e1;
@@ -229,7 +229,7 @@ public class G_Element {
     /* Recupère l'element de droite par rapport à la position e */
     public static Element getElementDroite(Element e) {
         Element e1 = getElement(e.getX()+1, e.getY());
-        if (e1 == null) { // pour ne pas bouger si la case n'existe pas
+        if (e1 == null ) { // pour ne pas bouger si la case n'existe pas
             e1 = e;
         }
         return e1;
