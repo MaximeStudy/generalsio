@@ -25,6 +25,7 @@ public class Montagne extends Element {
     	return (Integer) 0;
     }
 	@Override
+	//permet de dire si c'est une montagne ou non
 	public Boolean getEstFranchissable() {
 		return false;
 	}

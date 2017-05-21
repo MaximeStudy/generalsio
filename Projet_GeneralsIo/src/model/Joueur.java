@@ -13,6 +13,7 @@ public class Joueur {
     /**
      * @attribute
      */
+    
     private Color col;
     private Color encadrement;
 
@@ -25,7 +26,6 @@ public class Joueur {
      * @attribute
      */
 
-    List<Plaine> ListMesCases=new ArrayList<Plaine>();
     Element estSur=null;
     
     public Joueur(Color col, String nom, Element estSur, Color encadrement)    {
@@ -68,13 +68,6 @@ public class Joueur {
         return nom;
     }
 
-    public void setListMesCases(List<Plaine> ListMesCases) {
-        this.ListMesCases = ListMesCases;
-    }
-
-    public List<Plaine> getListMesPlaines() {
-        return ListMesCases;
-    }
 
     public void setEstSur(Element c) {
         this.estSur = c;
@@ -98,9 +91,7 @@ public class Joueur {
     
     public int sommeArmee() {
         int somme=0;
-        for(int i=0;i<this.getListMesPlaines().size();i++) {
-            somme+=this.getListMesPlaines().get(i).getNombreSoldats();
-        }
+        
         return somme;
     }
 }

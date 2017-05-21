@@ -22,7 +22,19 @@ public class Plaine extends Element{
      * @attribute
      */
     private Color couleur = Color.white;
+    
+    private static Joueur j=null;
+    
+    public Joueur getJ() {
+		return j;
+		
+	}
 
+	public void setJ(Joueur j) {
+		this.j = j;
+		this.couleur=j.getColor();
+	}
+	
     public Plaine(int x,int y)  {
         super(x,y);
     }

@@ -18,7 +18,10 @@ public class FenetreJeu extends JFrame implements KeyListener
 {
 	private int COLONNE=18,LIGNE=18;
 	
-	private JLabel[][] JL_cases; // tableau de JLabels
+	private static JLabel[][] JL_cases; // tableau de JLabels
+	
+	
+
 	private JPanel JP_Grille = new JPanel(); 	// panel du bas ( grille )
 	private GridLayout GL_Matrice = new GridLayout(COLONNE,LIGNE); 	
 	
@@ -74,22 +77,29 @@ public class FenetreJeu extends JFrame implements KeyListener
 	}
 	
 	private void InitCarte()	{
-				G_Carte.initialiserCarte();
-				for(int i=0;i<18;i++) {
-					for(int j=0;j<18;j++) {
-						//System.out.println("x :"+G_Element.getElement(i, j).getX()+" y :"+G_Element.getElement(i, j).getY()+" nomElem :"+G_Element.getElement(i, j).getNomElement());
-						//affiche les elements sur la carte
-						setIcon(G_Element.getElement(i, j).getNomElement(), JL_cases[i][j]);
-						setCouleur(G_Element.getElement(i, j).getCouleur(), JL_cases[i][j]);
-						//on veut pas afficher les soldats de la montagne
-						if(!G_Element.getElement(i, j).getNomElement().equals("montagne"))
-							setTexte(Integer.toString(G_Element.getElement(i, j).getSoldats()),JL_cases[i][j]);
-					}
+			G_Carte.initialiserCarte();
+			for(int i=0;i<18;i++) {
+				for(int j=0;j<18;j++) {
+					//System.out.println("x :"+G_Element.getElement(i, j).getX()+" y :"+G_Element.getElement(i, j).getY()+" nomElem :"+G_Element.getElement(i, j).getNomElement());
+					//affiche les elements sur la carte
+					setIcon(G_Element.getElement(i, j).getNomElement(), JL_cases[i][j]);
+					setCouleur(G_Element.getElement(i, j).getCouleur(), JL_cases[i][j]);
+					//on veut pas afficher les soldats de la montagne
+					if(!G_Element.getElement(i, j).getNomElement().equals("montagne"))
+						setTexte(Integer.toString(G_Element.getElement(i, j).getSoldats()),JL_cases[i][j]);
 				}
-				for(int i=0;i<G_Joueur.getNbJoueur();i++)
-				{
-	                 encadrer(JL_cases[G_Joueur.getListeJoueur().get(i).getEstSur().getX()][G_Joueur.getListeJoueur().get(i).getEstSur().getY()],G_Joueur.getListeJoueur().get(i).getEncadrementr(),4);
-				}
+			}
+			for(int i=0;i<G_Joueur.getNbJoueur();i++)
+			{
+                 encadrer(JL_cases[G_Joueur.getListeJoueur().get(i).getEstSur().getX()][G_Joueur.getListeJoueur().get(i).getEstSur().getY()],G_Joueur.getListeJoueur().get(i).getEncadrementr(),4);
+			}
+			
+			
+			/* Lancement du Thread */
+			ChronoDeplacement c=new ChronoDeplacement();
+			Thread thread =  new Thread(c) ;
+			thread.start();
+
 	}
 
 	
@@ -116,7 +126,7 @@ public class FenetreJeu extends JFrame implements KeyListener
 		position.setLayout(new FlowLayout(FlowLayout.CENTER));
 	}
 	
-	private void setCouleur(Color couleur, JLabel position)
+	public static void setCouleur(Color couleur, JLabel position)
 	{
 		position.setBackground(couleur);		
 	}
@@ -130,7 +140,15 @@ public class FenetreJeu extends JFrame implements KeyListener
         text.setVerticalAlignment(JLabel.CENTER);
         position.add(text);
 	}
+	
+	public static JLabel[][] getJL_cases() {
+		return JL_cases;
+	}
 
+	public static void setJL_cases(JLabel[][] jL_cases) {
+		JL_cases = jL_cases;
+	}
+	
 	
 	private class GestionnaireEvenement extends MouseAdapter
 	{

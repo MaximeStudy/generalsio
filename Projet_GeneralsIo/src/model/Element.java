@@ -7,22 +7,12 @@ public abstract class Element {
      * @attribute
      */
     private Integer y;
-
-    /**
-     * @attribute
-     */
-    private Boolean visible=false;
-
-    /**
-     * @attribute
-     */
     private Integer x;
+    private Boolean visible=false;
+    private Joueur j=null;
     
-    /**
-     * @attribute
-     */
 
-    public Element(Integer x, Integer y) {
+	public Element(Integer x, Integer y) {
         this.x=x;
         this.y=y;
     }
@@ -58,8 +48,6 @@ public abstract class Element {
     public abstract Color getCouleur() ;
     
     public abstract int getSoldats() ;
-
-
-
+    
     
 }

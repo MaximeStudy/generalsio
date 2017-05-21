@@ -6,6 +6,7 @@ import java.util.List;
 
 import model.Element;
 import model.Joueur;
+import model.Plaine;
 
 public class G_Joueur {
     /**
@@ -16,16 +17,6 @@ public class G_Joueur {
     public static void ajouterAction(Element e) {
     }
 
-    public static void deplacerJoueur(Element e, Joueur j) {
-    }
-    
-    /* renvoie la position du personnage */
-    public static Element positionPers(Joueur j) {
-    	//TODO
-    	return null;
-    }
-    
-
     public static void initialiserJoueur() {
     	listeJoueur.add(new Joueur(Color.BLUE,"Joueur bleu",G_Element.getBase(Color.BLUE),Color.CYAN));
     	listeJoueur.add(new Joueur(Color.RED,"Joueur rouge",G_Element.getBase(Color.RED),Color.ORANGE));
@@ -35,6 +26,7 @@ public class G_Joueur {
     }
 
     public static void ajouterElementJoueur(Joueur j, Element e) {
+    	
     }
 
     public static void realiserProchaineAction() {
@@ -44,6 +36,8 @@ public class G_Joueur {
     public static void deplacerPers(Joueur j, Element e) {
         if (e.getEstFranchissable()) { 
         	j.setEstSur(e);
+        	Plaine p=(Plaine)e;
+        	p.setJ(j);
         }
     }
     
