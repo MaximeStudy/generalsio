@@ -271,5 +271,20 @@ public class G_Element {
     public static void supprimerElement(Element e) {
     	getTousLesElements().remove(e);
     }
+    
+    public static void incrementerPlaine()
+    {
+
+    	for(int i=0;i<mesElements.size();i++)
+    	{
+			if(mesElements.get(i) instanceof Plaine && mesElements.get(i).getCouleur()!=Color.WHITE)
+			{
+    			Plaine p=(Plaine) mesElements.get(i);
+    			System.out.println(p.getSoldats());
+
+    			p.incrementerSoldat();
+			}
+    	}
+    }
    
 }

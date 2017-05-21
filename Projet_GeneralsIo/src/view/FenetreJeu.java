@@ -26,25 +26,16 @@ public class FenetreJeu extends JFrame implements KeyListener
 	private GridLayout GL_Matrice = new GridLayout(COLONNE,LIGNE); 	
 	
 	private String dossierIcone = "Icone/";
-	private int nbJoueur=2;
 	private int nbrAlea;
-	private int xAlea,yAlea;
-	private String base="base";			
+		
 	private String chateau="chateau";
 	private String montagne="montagne";
 	
-	private int NBRMONTAGNE=65;
-	private int NBRTOUR=22;
-	
-	private boolean tabCoord[][];
-	private int coordBase1[];
-	private int coordBase2[];
-	
-	private int tmp=0;
+
 	
 	private GestionnaireEvenement gest = new GestionnaireEvenement();
 	
-	Font font = new Font("Calibri",Font.CENTER_BASELINE,21);	//police ecrite sur les cases
+	static Font font = new Font("Calibri",Font.CENTER_BASELINE,21);	//police ecrite sur les cases
 	
 	//initialise la surface de jeu
 	public FenetreJeu()
@@ -97,8 +88,11 @@ public class FenetreJeu extends JFrame implements KeyListener
 			
 			/* Lancement du Thread */
 			ChronoDeplacement c=new ChronoDeplacement();
-			Thread thread =  new Thread(c) ;
-			thread.start();
+			Thread threadCase =  new Thread(c) ;
+			Incrementation i=new Incrementation();
+			Thread threadInc =  new Thread(i) ;
+			threadCase.start();
+			threadInc.start();
 
 	}
 
@@ -131,14 +125,13 @@ public class FenetreJeu extends JFrame implements KeyListener
 		position.setBackground(couleur);		
 	}
 	
-	private void setTexte(String texte, JLabel position)
+	public static void setTexte(String texte, JLabel position)
 	{
-        JLabel text = new JLabel(texte);
-        text.setFont(font);
-        text.setForeground(new Color(255,255,255));
-        text.setHorizontalAlignment(JLabel.CENTER);
-        text.setVerticalAlignment(JLabel.CENTER);
-        position.add(text);
+        position.setFont(font);
+        position.setForeground(new Color(255,255,255));
+        position.setHorizontalAlignment(JLabel.CENTER);
+        position.setVerticalAlignment(JLabel.CENTER);
+       
 	}
 	
 	public static JLabel[][] getJL_cases() {

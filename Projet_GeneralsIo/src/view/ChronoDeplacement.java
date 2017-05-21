@@ -1,10 +1,15 @@
 package view;
 
+
 import java.awt.Color;
+import java.awt.Font;
+
+import javax.swing.JLabel;
 
 import controler.G_Element;
+import model.Element;
 
-public class ChronoDeplacement implements Runnable{
+public class ChronoDeplacement implements Runnable {
 
 	@Override
 	public void run() {
@@ -17,13 +22,16 @@ public class ChronoDeplacement implements Runnable{
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			
+		    Font f=new Font("Calibri",Font.CENTER_BASELINE,21);
 			/* Parcours tous les elements et les affiche dans la bonne couleur*/
 			for(int i=0;i<G_Element.getTousLesElements().size();i++)
 			{
-				FenetreJeu.setCouleur(G_Element.getTousLesElements().get(i).getCouleur(), FenetreJeu.getJL_cases()[G_Element.getTousLesElements().get(i).getX()][G_Element.getTousLesElements().get(i).getY()]);
-
-				System.out.println(G_Element.getTousLesElements().get(i).getCouleur());
+				Element e=G_Element.getTousLesElements().get(i);
+				FenetreJeu.setCouleur(e.getCouleur(), FenetreJeu.getJL_cases()[e.getX()][e.getY()]);
+				//FenetreJeu.setTexte("coucou", FenetreJeu.getJL_cases()[e.getX()][e.getY()]);
+					
+				FenetreJeu.getJL_cases()[e.getX()][e.getY()].setText(Integer.toString(e.getSoldats()));
+				
 			}
 		}
 	}
