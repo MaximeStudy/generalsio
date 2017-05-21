@@ -1,5 +1,7 @@
 package controler;
 
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Element;
@@ -9,7 +11,7 @@ public class G_Joueur {
     /**
      * @associates <{uml.Joueur}>
      */
-    List<Joueur> listeJoueur;
+    static List<Joueur> listeJoueur= new ArrayList<Joueur>();
 
     public static void ajouterAction(Element e) {
     }
@@ -25,13 +27,12 @@ public class G_Joueur {
     
 
     public static Joueur initialiserJoueur(Element e) {
-    	//TODO
+    	listeJoueur.add(new Joueur());
     	return null;
     }
     
     public static void creationJoueur()
     {
-    	
     	
     }
     
@@ -48,5 +49,22 @@ public class G_Joueur {
     /* Change la postion du personnage */
     public static void deplacerPers(Element e) {
     	//TODO
+    }
+    
+    public void setListeJoueur(List<Joueur> listeJoueur) {
+        this.listeJoueur = listeJoueur;
+    }
+
+    public List<Joueur> getListeJoueur() {
+        return listeJoueur;
+    }
+    
+    public Joueur getJoueur(Color col) {
+        int i;
+        for(i=0;i<listeJoueur.size();i++) {
+            if (listeJoueur.get(i).getColor()==col)
+                break;
+        }
+        return listeJoueur.get(i);
     }
 }

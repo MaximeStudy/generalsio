@@ -15,7 +15,9 @@ public class G_Carte {
 	private static int NBRTOUR=22;
 	private static int tailleCarte=18;
 	    
-    
+    public static void initialiserCarte()   {
+    	G_Element.remplirPlateau();
+    }
 	
 	}
 

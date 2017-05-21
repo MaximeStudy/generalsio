@@ -2,11 +2,9 @@ package controler;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Collection;
 
 import java.util.List;
 
-import model.Joueur;
 import model.Montagne;
 import model.Plaine;
 import model.Base;
@@ -67,8 +65,8 @@ public class G_Element {
         return li;
     }
     /* Foncton permettant de remplir le plateau */
-    public static Element remplirPlateau() {
-    	//TODO
+    
+    public static void remplirPlateau() {
     	/* Rempli le plateau avec des plaines */
     	for(int i=0;i<18;i++)
 		{
@@ -153,7 +151,6 @@ public class G_Element {
 				}
 		}
 
-    	return null;
     }
     
     public static Element getBase(Color c) {

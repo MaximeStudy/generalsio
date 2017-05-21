@@ -5,6 +5,7 @@ import java.util.ListIterator;
 
 import javax.swing.border.EtchedBorder;
 
+import controler.G_Carte;
 import controler.G_Element;
 
 import java.awt.*;
@@ -72,7 +73,7 @@ public class FenetreJeu extends JFrame implements KeyListener
 	}
 	
 	private void InitCarte()	{
-				G_Element.remplirPlateau();
+				G_Carte.initialiserCarte();
 				for(int i=0;i<18;i++) {
 					for(int j=0;j<18;j++) {
 						//System.out.println("x :"+G_Element.getElement(i, j).getX()+" y :"+G_Element.getElement(i, j).getY()+" nomElem :"+G_Element.getElement(i, j).getNomElement());
@@ -85,61 +86,6 @@ public class FenetreJeu extends JFrame implements KeyListener
 					}
 				}
 	}
-		
-//		//on genre un chemin vide en L d'une base a l'autre
-//		if (coordBase1[0]>coordBase2[0])	
-//		{
-//			for (int i=coordBase1[0]-1; i>= coordBase2[0]; i--)
-//			{
-//				tabCoord[i][coordBase1[1]]=true;
-//				tmp=i;
-//			}
-//		}
-//		else
-//		{
-//			for (int i=coordBase1[0]+1; i<= coordBase2[0]; i++)
-//			{
-//				tabCoord[i][coordBase1[1]]=true;
-//				tmp=i;
-//			}	
-//		}
-//
-//		for (int i=coordBase1[1]+1; i< coordBase2[1]; i++)
-//		{
-//			tabCoord[tmp][i]=true;
-//		}
-//
-//
-//
-//		for (int i=0; i< NBRTOUR; i++)
-//		{
-//			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-//			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;}
-//			if (tabCoord[xAlea][yAlea] == false)
-//			{
-//				setImgTour(JL_cases[xAlea][yAlea]);
-//				tabCoord[xAlea][yAlea]=true;		
-//			}
-//			else
-//			{
-//				i--;
-//			}
-//		}
-//
-//		for (int i=0; i< NBRMONTAGNE; i++)
-//		{
-//			xAlea=(int) (Math.random()*(COLONNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-//			yAlea=(int) (Math.random()*(LIGNE));  //Math.random()*( max - mini + 1 ) ) + mini;
-//			if (tabCoord[xAlea][yAlea] == false)
-//			{
-//				setImgMontagne(JL_cases[xAlea][yAlea]);
-//				tabCoord[xAlea][yAlea]=true;
-//			}
-//			else
-//			{
-//				i--;
-//			}
-//		}
 
 	
 	private void setImgMontagne(JLabel position)
@@ -161,17 +107,13 @@ public class FenetreJeu extends JFrame implements KeyListener
 	private void setIcon(String element, JLabel position)
 		{
 		String image= dossierIcone + element+".png";
-		//System.out.println(image);
 		position.setIcon(new ImageIcon(image));
 		position.setLayout(new FlowLayout(FlowLayout.CENTER));
 	}
-
-	
-	
 	
 	private void setCouleur(Color couleur, JLabel position)
 	{
-		position.setBackground(couleur);		//carr� rouge
+		position.setBackground(couleur);		
 	}
 	
 	private void setTexte(String texte, JLabel position)
@@ -247,7 +189,7 @@ public class FenetreJeu extends JFrame implements KeyListener
          switch( keyCode ) { 
              case KeyEvent.VK_UP:
                  System.out.println("Up 1");
-                 encadrer(JL_cases[coordBase1[0]][coordBase1[1]],Color.cyan);
+                 encadrer(JL_cases[G_Element.getBase(Color.BLUE).getX()][G_Element.getBase(Color.BLUE).getY()],Color.cyan);
                  break;
              case KeyEvent.VK_DOWN:
                  // handle down 
@@ -262,14 +204,13 @@ public class FenetreJeu extends JFrame implements KeyListener
              case KeyEvent.VK_RIGHT :
                  // handle right
                  System.out.println("Right 1");
-
                  break;
           }
          
          switch( keyCode ) { 
          case KeyEvent.VK_Z:
              System.out.println("Up 2");
-             encadrer(JL_cases[coordBase2[0]][coordBase2[1]], Color.orange);
+             encadrer(JL_cases[G_Element.getBase(Color.RED).getX()][G_Element.getBase(Color.RED).getY()],Color.ORANGE);
              
              break;
          case KeyEvent.VK_S:

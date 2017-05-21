@@ -1,5 +1,7 @@
 package model;
 
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Joueur {
@@ -11,7 +13,7 @@ public class Joueur {
     /**
      * @attribute
      */
-    private Integer id;
+    private Color col;
 
     /**
      * @attribute
@@ -21,11 +23,16 @@ public class Joueur {
     /**
      * @attribute
      */
-    private List<Joueur> mesJoueurs;
 
-    List<Plaine> ListMesCases;
-    Element EstSur;
-
+    List<Plaine> ListMesCases=new ArrayList<Plaine>();
+    Element estSur;
+    
+    public void Joueur(Color col, String nom, Element estSur)    {
+    	this.col=col;
+    	this.nom=nom;
+    	this.estSur=estSur;
+    }
+    
 
     public void setVie(Boolean vie) {
         this.vie = vie;
@@ -35,12 +42,12 @@ public class Joueur {
         return vie;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setColor(Color c) {
+        this.col = c;
     }
 
-    public long getId() {
-        return id;
+    public Color getColor() {
+        return col;
     }
 
     public void setNom(String nom) {
@@ -49,14 +56,6 @@ public class Joueur {
 
     public String getNom() {
         return nom;
-    }
-
-    public void setMesJoueurs(List<Joueur> mesJoueurs) {
-        this.mesJoueurs = mesJoueurs;
-    }
-
-    public List<Joueur> getMesJoueurs() {
-        return mesJoueurs;
     }
 
     public void setListMesCases(List<Plaine> ListMesCases) {
@@ -68,20 +67,11 @@ public class Joueur {
     }
 
     public void setEstSur(Element c) {
-        this.EstSur = c;
+        this.estSur = c;
     }
 
     public Element getEstSur() {
-        return EstSur;
-    }
-
-    public Joueur getJoueur(Integer id) {
-        int i;
-        for(i=0;i<this.mesJoueurs.size();i++) {
-            if (mesJoueurs.get(i).getId()==id)
-                break;
-        }
-        return mesJoueurs.get(i);
+        return estSur;
     }
 
     public void PrendreSoldatSuivent(Element e) {
