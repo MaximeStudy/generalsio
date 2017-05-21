@@ -64,7 +64,6 @@ public class Plaine extends Element{
         return nb;
     }
 
-
     public void incrementerSoldat() {
         this.nombreSoldats++;
     }

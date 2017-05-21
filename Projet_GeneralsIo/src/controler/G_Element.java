@@ -16,7 +16,7 @@ public class G_Element {
     /**
      * @associates <{uml.Element}>
      */
-    private static List<Element> mesElements=new ArrayList<Element>();
+    private static List<Element> mesElements = new ArrayList<Element>();
     
     public static List<Element> getTousLesElements() {
         return mesElements;
@@ -165,7 +165,7 @@ public class G_Element {
     
     /* Recupère l'element de en-dessus par rapport à la position e */
     public static Element getElementBas(Element e) {
-        Element e1 = getElement(e.getX() + 1, e.getY());
+        Element e1 = getElement(e.getX() , e.getY()+1);
         if (e1 == null) {
             e1 = e;
         }
@@ -173,25 +173,26 @@ public class G_Element {
     }
     /* Recupère l'element de en-bas à gauche par rapport à la position e */
     public static Element getElementBasGauche(Element e) {
-        Element e1 = getElement(e.getX() + 1, e.getY() - 1);
-        if (e1 == null) {
-            e1 = e;
-        }
-        return e1;
+    	 Element e1 = getElement(e.getX() -1, e.getY() +1);
+         if (e1 == null) {
+             e1 = e;
+         }
+         return e1;
+
     }
 
     /* Recupère l'element de en-haut à droite par rapport à la position e */
     public static Element getElementHautDroite(Element e) {
-        Element e1 = getElement(e.getX() - 1, e.getY() + 1);
-        if (e1 == null) {
-            e1 = e;
-        }
-        return e1;
+    	 Element e1 = getElement(e.getX() +1, e.getY() -1);
+         if (e1 == null) {
+             e1 = e;
+         }
+         return e1;
     }
 
     /* Recupère l'element de haut-dessus par rapport à la position e */
     public static Element getElementHaut(Element e) {
-        Element e1 = getElement(e.getX() - 1, e.getY());
+        Element e1 = getElement(e.getX(), e.getY()-1);
         if (e1 == null) {
             e1 = e;
         }
@@ -200,7 +201,7 @@ public class G_Element {
 
     /* Recupère l'element de gauche par rapport à la position e */
     public static Element getElementGauche(Element e) {
-        Element e1 = getElement(e.getX(), e.getY() - 1);
+        Element e1 = getElement(e.getX()-1, e.getY());
         if (e1 == null) {
             e1 = e;
         }
@@ -216,23 +217,18 @@ public class G_Element {
         return e1;
     }
     
-    
     /* Recupère l'element de en-haut à gauche par rapport à la position e */
     public static Element getElementHautGauche(Element e) {
-        Element e1 = getElement(e.getX() - 1, e.getY() - 1);
-        if (e1 == null) {
-            e1 = e;
-        }
-        return e1;
-    }
-
-    public static Element getDebut(Element e) {
-    	return null;
+    	 Element e1 = getElement(e.getX() -1, e.getY() -1);
+         if (e1 == null) {
+             e1 = e;
+         }
+         return e1;
     }
     
     /* Recupère l'element de droite par rapport à la position e */
     public static Element getElementDroite(Element e) {
-        Element e1 = getElement(e.getX(), e.getY() + 1);
+        Element e1 = getElement(e.getX()+1, e.getY());
         if (e1 == null) { // pour ne pas bouger si la case n'existe pas
             e1 = e;
         }

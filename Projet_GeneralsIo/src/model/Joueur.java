@@ -14,6 +14,7 @@ public class Joueur {
      * @attribute
      */
     private Color col;
+    private Color encadrement;
 
     /**
      * @attribute
@@ -25,12 +26,13 @@ public class Joueur {
      */
 
     List<Plaine> ListMesCases=new ArrayList<Plaine>();
-    Element estSur;
+    Element estSur=null;
     
-    public void Joueur(Color col, String nom, Element estSur)    {
+    public Joueur(Color col, String nom, Element estSur, Color encadrement)    {
     	this.col=col;
     	this.nom=nom;
     	this.estSur=estSur;
+    	this.encadrement=encadrement;
     }
     
 
@@ -48,6 +50,14 @@ public class Joueur {
 
     public Color getColor() {
         return col;
+    }
+    
+    public void setEncadrement(Color c) {
+        this.encadrement = c;
+    }
+
+    public Color getEncadrementr() {
+        return encadrement;
     }
 
     public void setNom(String nom) {

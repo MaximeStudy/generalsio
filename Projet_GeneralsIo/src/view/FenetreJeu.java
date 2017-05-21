@@ -7,6 +7,7 @@ import javax.swing.border.EtchedBorder;
 
 import controler.G_Carte;
 import controler.G_Element;
+import controler.G_Joueur;
 
 import java.awt.*;
 import javax.swing.*;
@@ -85,6 +86,10 @@ public class FenetreJeu extends JFrame implements KeyListener
 							setTexte(Integer.toString(G_Element.getElement(i, j).getSoldats()),JL_cases[i][j]);
 					}
 				}
+				for(int i=0;i<G_Joueur.getNbJoueur();i++)
+				{
+	                 encadrer(JL_cases[G_Joueur.getListeJoueur().get(i).getEstSur().getX()][G_Joueur.getListeJoueur().get(i).getEstSur().getY()],G_Joueur.getListeJoueur().get(i).getEncadrementr(),4);
+				}
 	}
 
 	
@@ -147,13 +152,7 @@ public class FenetreJeu extends JFrame implements KeyListener
 					{
 						if (eve.getSource() == JL_cases[colonne][ligne])
 						{
-//							System.out.println("Ligne = "+ ligne);
-//							System.out.println("Colonne = "+ colonne);
-//							System.out.println("Ligne ancienne = "+ ligneClic);
-//							System.out.println("Colonne ancienne = "+ colonneClic);
-
-								JL_cases[ligneClic][colonneClic].setBorder(BorderFactory.createLineBorder(Color.black, 2));	// encadre case
-								
+							JL_cases[ligneClic][colonneClic].setBorder(BorderFactory.createLineBorder(Color.black, 2));	// encadre case
 							colonneClic= colonne;
 							ligneClic = ligne;
 							JL_cases[colonneClic][ligneClic].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
@@ -167,9 +166,9 @@ public class FenetreJeu extends JFrame implements KeyListener
 	
 	}
 	
-	public void encadrer(JLabel jl, Color c)
+	public void encadrer(JLabel jl, Color c, int largeur)
 	{			
-		jl.setBorder(BorderFactory.createLineBorder(c, 4));	// encadre case
+		jl.setBorder(BorderFactory.createLineBorder(c, largeur));	// encadre case
 	}
 
 	 @Override
@@ -184,51 +183,63 @@ public class FenetreJeu extends JFrame implements KeyListener
 	 
 	 @Override
      public void keyReleased(KeyEvent e) {
-		 //TODO le mettre dans un thread
+         //Le curseur a change, il faut mettre la decoration de la case par defaut (noir)
+		 encadrer(JL_cases[G_Joueur.getJoueur(Color.BLUE).getEstSur().getX()][G_Joueur.getJoueur(Color.BLUE).getEstSur().getY()],Color.BLACK,2);
 		 int keyCode = e.getKeyCode();
          switch( keyCode ) { 
              case KeyEvent.VK_UP:
                  System.out.println("Up 1");
-                 encadrer(JL_cases[G_Element.getBase(Color.BLUE).getX()][G_Element.getBase(Color.BLUE).getY()],Color.cyan);
+                 G_Carte.deplacerHaut(G_Joueur.getJoueur(Color.BLUE));
                  break;
              case KeyEvent.VK_DOWN:
                  // handle down 
                  System.out.println("Down 1");
+                 G_Carte.deplacerBas(G_Joueur.getJoueur(Color.BLUE));
 
                  break;
              case KeyEvent.VK_LEFT:
                  // handle left
                  System.out.println("Left 1");
+                 G_Carte.deplacerGauche(G_Joueur.getJoueur(Color.BLUE));
+
 
                  break;
              case KeyEvent.VK_RIGHT :
                  // handle right
                  System.out.println("Right 1");
+                 G_Carte.deplacerDroite(G_Joueur.getJoueur(Color.BLUE));
+                 
                  break;
           }
          
+		 encadrer(JL_cases[G_Joueur.getJoueur(Color.BLUE).getEstSur().getX()][G_Joueur.getJoueur(Color.BLUE).getEstSur().getY()],Color.CYAN,5);
+		 encadrer(JL_cases[G_Joueur.getJoueur(Color.RED).getEstSur().getX()][G_Joueur.getJoueur(Color.RED).getEstSur().getY()],Color.BLACK,2);
          switch( keyCode ) { 
          case KeyEvent.VK_Z:
              System.out.println("Up 2");
-             encadrer(JL_cases[G_Element.getBase(Color.RED).getX()][G_Element.getBase(Color.RED).getY()],Color.ORANGE);
-             
+             G_Carte.deplacerHaut(G_Joueur.getJoueur(Color.RED));
+
              break;
          case KeyEvent.VK_S:
              // handle down 
              System.out.println("Down 2");
+             G_Carte.deplacerBas(G_Joueur.getJoueur(Color.RED));
 
              break;
          case KeyEvent.VK_Q:
              // handle left
              System.out.println("Left 2");
+             G_Carte.deplacerGauche(G_Joueur.getJoueur(Color.RED));
 
              break;
          case KeyEvent.VK_D :
              // handle right
              System.out.println("Right 2");
-
+             G_Carte.deplacerDroite(G_Joueur.getJoueur(Color.RED));
              break;
       }
+         encadrer(JL_cases[G_Joueur.getJoueur(Color.RED).getEstSur().getX()][G_Joueur.getJoueur(Color.RED).getEstSur().getY()],Color.ORANGE,5);
+
      }
 	
 }
