@@ -26,7 +26,7 @@ public class G_Element {
 	private static int nombreChateau=22;
 	private static Color colJ1=Color.BLUE;
 	private static Color colJ2=Color.RED;
-
+	
     /* Renvoie la liste d'elements qui se situe autour du personnage */
     public static List<Element> getElementAutourPerso(Element e) {
         List<Element> li = new ArrayList<Element>();
@@ -247,7 +247,10 @@ public class G_Element {
         return res;
     }
     
-    
+    public void prendreElementsAvecSoi(Element ancien)
+    {
+    	
+    }
     public static void ajouterPlaine(int x,int y)
     {
     	mesElements.add(new Plaine(x,y));

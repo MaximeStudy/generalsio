@@ -29,5 +29,10 @@ public class Montagne extends Element {
 	public Boolean getEstFranchissable() {
 		return false;
 	}
+	@Override
+	public void setSoldats(int s) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

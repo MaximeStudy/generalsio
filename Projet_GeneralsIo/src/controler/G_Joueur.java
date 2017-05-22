@@ -34,7 +34,10 @@ public class G_Joueur {
     
     /* Change la postion du personnage */
     public static void deplacerPers(Joueur j, Element e) {
-        if (e.getEstFranchissable()) { 
+        if (e.getEstFranchissable() && (e.getSoldats()+1<j.getEstSur().getSoldats() || e.getCouleur()==j.getColor()) && 
+        		j.getColor()==j.getEstSur().getCouleur()) { 
+        	e.setSoldats(e.getSoldats()+j.getEstSur().getSoldats()-1);
+        	j.getEstSur().setSoldats(1);
         	j.setEstSur(e);
         	Plaine p=(Plaine)e;
         	p.setJ(j);

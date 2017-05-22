@@ -91,6 +91,11 @@ public class Plaine extends Element{
     	return true;
     }
 
+	@Override
+	public void setSoldats(int s) {
+		this.nombreSoldats=s;
+	}
+
     
 }
 

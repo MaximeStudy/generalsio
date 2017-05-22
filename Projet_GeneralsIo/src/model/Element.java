@@ -48,6 +48,7 @@ public abstract class Element {
     public abstract Color getCouleur() ;
     
     public abstract int getSoldats() ;
-    
+    public abstract void setSoldats(int s) ;
+
     
 }
