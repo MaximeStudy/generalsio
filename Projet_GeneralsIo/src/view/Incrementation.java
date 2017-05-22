@@ -9,7 +9,7 @@ public class Incrementation implements Runnable {
 		{
 			try {
 				// attente 1 seconde
-				Thread.sleep(1000);
+				Thread.sleep(100);
 				
 			} catch (InterruptedException e) {
 				e.printStackTrace();

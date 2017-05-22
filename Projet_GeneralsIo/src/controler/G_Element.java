@@ -274,7 +274,6 @@ public class G_Element {
     
     public static void incrementerPlaine()
     {
-
     	for(int i=0;i<mesElements.size();i++)
     	{
 			if(mesElements.get(i) instanceof Plaine && mesElements.get(i).getCouleur()!=Color.WHITE)
@@ -283,7 +282,7 @@ public class G_Element {
     			System.out.println(p.getSoldats());
 
     			p.incrementerSoldat();
-			}
+			} 	
     	}
     }
    

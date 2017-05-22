@@ -35,7 +35,7 @@ public class FenetreJeu extends JFrame implements KeyListener
 	
 	private GestionnaireEvenement gest = new GestionnaireEvenement();
 	
-	static Font font = new Font("Calibri",Font.CENTER_BASELINE,21);	//police ecrite sur les cases
+	static Font font = new Font("Calibri",Font.CENTER_BASELINE,18);	//police ecrite sur les cases
 	
 	//initialise la surface de jeu
 	public FenetreJeu()
