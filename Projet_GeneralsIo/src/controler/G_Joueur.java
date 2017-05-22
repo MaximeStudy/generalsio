@@ -34,13 +34,26 @@ public class G_Joueur {
     
     /* Change la postion du personnage */
     public static void deplacerPers(Joueur j, Element e) {
+    	/* peut seulement traverser la case si ce n'est pas une montagne, si la couleur de la case suivante est de la couleur du joueur et que le nombre sur la case presente est sup a la case suivante (la derniere clause eprmet de ne pas perdre de soldats quand on fonce vers un mur exterieur*/
         if (e.getEstFranchissable() && (e.getSoldats()+1<j.getEstSur().getSoldats() || e.getCouleur()==j.getColor()) && 
-        		j.getColor()==j.getEstSur().getCouleur()) { 
-        	e.setSoldats(e.getSoldats()+j.getEstSur().getSoldats()-1);
-        	j.getEstSur().setSoldats(1);
-        	j.setEstSur(e);
-        	Plaine p=(Plaine)e;
-        	p.setJ(j);
+        		j.getColor()==j.getEstSur().getCouleur() &&  j.getEstSur() != e) { 
+        	if(j.getColor() != e.getCouleur())
+        	{
+        		e.setSoldats(j.getEstSur().getSoldats()-e.getSoldats()-1);
+            	j.getEstSur().setSoldats(1);
+            	j.setEstSur(e);
+            	Plaine p=(Plaine)e;
+            	p.setJ(j);
+        	}
+        	else
+        	{
+        		e.setSoldats(e.getSoldats()+j.getEstSur().getSoldats());
+            	j.getEstSur().setSoldats(1);
+            	j.setEstSur(e);
+            	Plaine p=(Plaine)e;
+            	p.setJ(j);
+        	}
+        	
         }
     }
     
