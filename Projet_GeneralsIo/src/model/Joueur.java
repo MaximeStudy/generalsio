@@ -27,12 +27,18 @@ public class Joueur {
      */
 
     Element estSur=null;
+    Base base=null;
     
-    public Joueur(Color col, String nom, Element estSur, Color encadrement)    {
+	public Base getBase() {
+		return base;
+	}
+
+	public Joueur(Color col, String nom, Element estSur, Color encadrement)    {
     	this.col=col;
     	this.nom=nom;
     	this.estSur=estSur;
     	this.encadrement=encadrement;
+    	this.base=(Base)estSur;
     }
     
 

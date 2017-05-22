@@ -89,13 +89,20 @@ public class FenetreJeu extends JFrame implements KeyListener
 			/* Lancement du Thread */
 			ChronoDeplacement c=new ChronoDeplacement();
 			Thread threadCase =  new Thread(c) ;
+			
 			IncrementationPlaine i=new IncrementationPlaine();
 			Thread threadIncPlaine =  new Thread(i) ;
+			
 			IncrementationChateau ch=new IncrementationChateau();
 			Thread threadIncChateau =  new Thread(ch) ;
+			
+			VerifGagnant verif=new VerifGagnant();
+			Thread threadVerif =  new Thread(verif) ;
+			
 			threadCase.start();
 			threadIncPlaine.start();
 			threadIncChateau.start();
+			threadVerif.start();
 	}
 
 	

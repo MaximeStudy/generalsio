@@ -48,7 +48,8 @@ public class G_Joueur {
         	}
         	else
         	{
-        		e.setSoldats(e.getSoldats()+j.getEstSur().getSoldats());
+        		
+        		e.setSoldats(e.getSoldats()+j.getEstSur().getSoldats()-1);
             	j.getEstSur().setSoldats(1);
             	j.setEstSur(e);
             	Plaine p=(Plaine)e;
