@@ -15,5 +15,4 @@ public class Base extends Chateau {
     public String getNomElement() {
     	return "base";
     }
-
 }

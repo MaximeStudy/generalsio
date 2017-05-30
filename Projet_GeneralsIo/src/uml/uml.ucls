@@ -44,7 +44,7 @@
   </class>  
   <class id="6" language="java" name="model.Plaine" project="Projet_GeneralsIo" 
     file="/Projet_GeneralsIo/src/model/Plaine.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="140" width="201" x="872" y="95"/>    
+    <position height="196" width="206" x="792" y="38"/>    
     <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -78,22 +78,22 @@
     <end type="SOURCE" refId="6"/>    
     <end type="TARGET" refId="3"/>  
   </generalization>  
-  <association id="11">    
+  <generalization id="11">    
+    <end type="SOURCE" refId="5"/>    
+    <end type="TARGET" refId="3"/>  
+  </generalization>  
+  <association id="12">    
     <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="12" name="mesElements">        
+      <attribute id="13" name="mesElements">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="13" minimum="0" maximum="2147483647">        
+      <multiplicity id="14" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="3" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="14">    
-    <end type="SOURCE" refId="5"/>    
-    <end type="TARGET" refId="3"/>  
-  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

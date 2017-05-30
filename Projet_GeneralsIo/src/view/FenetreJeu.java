@@ -8,6 +8,8 @@ import javax.swing.border.EtchedBorder;
 import controler.G_Carte;
 import controler.G_Element;
 import controler.G_Joueur;
+import model.IncrementationChateau;
+import model.IncrementationPlaine;
 
 import java.awt.*;
 import javax.swing.*;
@@ -136,11 +138,17 @@ public class FenetreJeu extends JFrame implements KeyListener
 	
 	public static void setTexte(String texte, JLabel position)
 	{
-        position.setFont(font);
-        position.setForeground(new Color(255,255,255));
-        position.setHorizontalAlignment(JLabel.CENTER);
-        position.setVerticalAlignment(JLabel.CENTER);
-       
+		int nb=Integer.parseInt(texte);
+		
+			position.setFont(font);
+	        position.setForeground(new Color(255,255,255));
+	        position.setHorizontalAlignment(JLabel.CENTER);
+	        position.setVerticalAlignment(JLabel.CENTER);
+		
+
+        
+        
+        /* test */
 	}
 	
 	public static JLabel[][] getJL_cases() {

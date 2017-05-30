@@ -277,30 +277,36 @@ public class G_Element {
     
     public static void incrementerPlaine()
     {
-    	for(int i=0;i<mesElements.size();i++)
+    	synchronized (mesElements)
     	{
-    		//incrementer seulement les plaines
-			if(mesElements.get(i) instanceof Plaine && mesElements.get(i).getCouleur()!=Color.WHITE && !(mesElements.get(i) instanceof Chateau))
-			{
-    			Plaine p=(Plaine) mesElements.get(i);
-    			System.out.println(p.getSoldats());
+    		for(int i=0;i<mesElements.size();i++)
+        	{
+        		//incrementer seulement les plaines
+    			if(mesElements.get(i) instanceof Plaine && mesElements.get(i).getCouleur()!=Color.WHITE && !(mesElements.get(i) instanceof Chateau))
+    			{
+        			Plaine p=(Plaine) mesElements.get(i);
+        			System.out.println(p.getSoldats());
 
-    			p.incrementerSoldat();
-			} 	
+        			p.incrementerSoldat();
+    			} 	
+        	}
     	}
     }
     
     public static void incrementerChateaux()
     {
-    	for(int i=0;i<mesElements.size();i++)
+    	synchronized (mesElements)
     	{
-    		//incrementer seulement les chateaux non vide
-			if(mesElements.get(i) instanceof Chateau && mesElements.get(i).getCouleur()!=Color.WHITE)
-			{
-    			Plaine p=(Plaine) mesElements.get(i);
-    			System.out.println(p.getSoldats());
-    			p.incrementerSoldat();
-			} 	
+    		for(int i=0;i<mesElements.size();i++)
+        	{
+        		//incrementer seulement les chateaux non vide
+    			if(mesElements.get(i) instanceof Chateau && mesElements.get(i).getCouleur()!=Color.WHITE)
+    			{
+        			Plaine p=(Plaine) mesElements.get(i);
+        			System.out.println(p.getSoldats());
+        			p.incrementerSoldat();
+    			} 	
+        	}
     	}
     }
    
