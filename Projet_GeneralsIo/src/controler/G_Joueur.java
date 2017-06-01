@@ -14,24 +14,11 @@ public class G_Joueur {
      */
     static List<Joueur> listeJoueur= new ArrayList<Joueur>();
 
-    public static void ajouterAction(Element e) {
-    }
-
     public static void initialiserJoueur() {
     	listeJoueur.add(new Joueur(Color.BLUE,"Joueur bleu",G_Element.getBase(Color.BLUE),Color.CYAN));
     	listeJoueur.add(new Joueur(Color.RED,"Joueur rouge",G_Element.getBase(Color.RED),Color.ORANGE));
     }
 
-    public static void tuerJoueur(Integer id) {
-    }
-
-    public static void ajouterElementJoueur(Joueur j, Element e) {
-    	
-    }
-
-    public static void realiserProchaineAction() {
-    }
-    
     /* Change la postion du personnage */
     public static void deplacerPers(Joueur j, Element e) {
     	synchronized(G_Element.getTousLesElements())  {
@@ -49,7 +36,6 @@ public class G_Joueur {
             	}
             	else
             	{
-            		
             		e.setSoldats(e.getSoldats()+j.getEstSur().getSoldats()-1);
                 	j.getEstSur().setSoldats(1);
                 	j.setEstSur(e);
@@ -74,7 +60,6 @@ public class G_Joueur {
         return listeJoueur.size();
     }
 
-    
     public static Joueur getJoueur(Color col) {
         int i;
         for(i=0;i<listeJoueur.size();i++) {

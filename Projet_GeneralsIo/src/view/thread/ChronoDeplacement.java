@@ -1,4 +1,4 @@
-package view;
+package view.thread;
 
 
 import java.awt.Color;
@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import controler.G_Element;
 import model.Chateau;
 import model.Element;
+import view.form.FenetreJeu;
 
 public class ChronoDeplacement implements Runnable {
 	static Font font = new Font("Calibri",Font.CENTER_BASELINE,18);
@@ -24,7 +25,6 @@ public class ChronoDeplacement implements Runnable {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-		    Font f=new Font("Calibri",Font.CENTER_BASELINE,21);
 			/* Parcours tous les elements et les affiche dans la bonne couleur*/
 			for(int i=0;i<G_Element.getTousLesElements().size();i++)
 			{

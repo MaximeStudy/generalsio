@@ -64,8 +64,8 @@ public class G_Element {
         }
         return li;
     }
-    /* Foncton permettant de remplir le plateau */
     
+    /* Foncton permettant de remplir le plateau */
     public static void remplirPlateau() {
     	/* Rempli le plateau avec des plaines */
     	for(int i=0;i<18;i++)
@@ -100,8 +100,8 @@ public class G_Element {
 				G_Element.ajouterChateau(xAlea, yAlea);
 			}
 		}
-		//TODO revoir cette partie
-    	/* Cree les differentes montagne */
+
+		/* Cree les differentes montagne */
 		for (int i=0; i< nombreMontagne; i++)
 		{
 			xAlea=(int) (Math.random()*(18));  //Math.random()*( max - mini + 1 ) ) + mini;
@@ -152,7 +152,7 @@ public class G_Element {
 		}
 
     }
-    
+    /* recupere la base d'un couleur */
     public static Element getBase(Color c) {
     	Element e1=null;
     	for(int i=0;i<getTousLesElements().size();i++)
@@ -247,10 +247,6 @@ public class G_Element {
         return res;
     }
     
-    public void prendreElementsAvecSoi(Element ancien)
-    {
-    	
-    }
     public static void ajouterPlaine(int x,int y)
     {
     	mesElements.add(new Plaine(x,y));

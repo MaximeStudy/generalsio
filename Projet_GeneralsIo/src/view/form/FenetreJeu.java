@@ -1,15 +1,14 @@
-package view;
-
-import java.lang.Math;
-import java.util.ListIterator;
+package view.form;
 
 import javax.swing.border.EtchedBorder;
 
 import controler.G_Carte;
 import controler.G_Element;
 import controler.G_Joueur;
-import model.IncrementationChateau;
-import model.IncrementationPlaine;
+import model.thread.IncrementationChateau;
+import model.thread.IncrementationPlaine;
+import view.thread.ChronoDeplacement;
+import view.thread.VerifGagnant;
 
 import java.awt.*;
 import javax.swing.*;
@@ -18,30 +17,25 @@ import java.awt.event.*;
  
 public class FenetreJeu extends JFrame implements KeyListener
 {
+	//for keylistener
+	private static final long serialVersionUID = 1L;
+
 	private int COLONNE=18,LIGNE=18;
 	
 	private static JLabel[][] JL_cases; // tableau de JLabels
-	
 	
 
 	private JPanel JP_Grille = new JPanel(); 	// panel du bas ( grille )
 	private GridLayout GL_Matrice = new GridLayout(COLONNE,LIGNE); 	
 	
 	private String dossierIcone = "Icone/";
-	private int nbrAlea;
-		
-	private String chateau="chateau";
-	private String montagne="montagne";
-	
-
 	
 	private GestionnaireEvenement gest = new GestionnaireEvenement();
 	
 	static Font font = new Font("Calibri",Font.CENTER_BASELINE,18);	//police ecrite sur les cases
 	
 	//initialise la surface de jeu
-	public FenetreJeu()
-	{
+	public FenetreJeu()	{
 		JL_cases = new JLabel[COLONNE][LIGNE];	 // cr�ation du tableau de JLabel
 		this.getContentPane().setLayout(null);   // cr�� bandeau vide
 		this.setSize(new Dimension(1000, 800)); //Taille fenetre entiere
@@ -108,22 +102,6 @@ public class FenetreJeu extends JFrame implements KeyListener
 	}
 
 	
-	private void setImgMontagne(JLabel position)
-	{
-		Color color1= new Color(110,110,110);
-		setIcon(montagne,position);
-		setCouleur(color1,position);
-	}
-
-	private void setImgChateau(JLabel position)
-	{
-		Color color1= new Color(180,180,180);
-		setIcon(chateau,position);
-		setCouleur(color1,position);
-		nbrAlea=(int) (Math.random()*(16)+40);
-		setTexte(Integer.toString(nbrAlea),position);
-	}
-	
 	private void setIcon(String element, JLabel position)
 		{
 		String image= dossierIcone + element+".png";
@@ -137,18 +115,11 @@ public class FenetreJeu extends JFrame implements KeyListener
 	}
 	
 	public static void setTexte(String texte, JLabel position)
-	{
-		int nb=Integer.parseInt(texte);
-		
+	{		
 			position.setFont(font);
 	        position.setForeground(new Color(255,255,255));
 	        position.setHorizontalAlignment(JLabel.CENTER);
 	        position.setVerticalAlignment(JLabel.CENTER);
-		
-
-        
-        
-        /* test */
 	}
 	
 	public static JLabel[][] getJL_cases() {
@@ -165,8 +136,7 @@ public class FenetreJeu extends JFrame implements KeyListener
 		
 		private int CaseSelect[];
 		private int ligneClic;
-		private int colonneClic;
-		
+		private int colonneClic;	
 		
 		public void mouseClicked(MouseEvent eve)
 		{

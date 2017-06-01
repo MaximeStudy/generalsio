@@ -1,4 +1,4 @@
-package view;
+package view.thread;
 
 import javax.swing.JOptionPane;
 
@@ -19,8 +19,7 @@ public class VerifGagnant implements Runnable {
 			System.out.println("Joueur : "+G_Joueur.getListeJoueur().get(0).getColor() +" "+G_Joueur.getListeJoueur().get(0).getColor());
 			System.out.println("Joueur : "+G_Joueur.getListeJoueur().get(1).getColor() +" "+G_Joueur.getListeJoueur().get(1).getColor());
 
-			if(G_Joueur.getListeJoueur().get(0).getBase().getCouleur()==G_Joueur.getListeJoueur().get(1).getColor())
-			{
+			if(G_Joueur.getListeJoueur().get(0).getBase().getCouleur()==G_Joueur.getListeJoueur().get(1).getColor()) {
 				JOptionPane.showMessageDialog(null, G_Joueur.getListeJoueur().get(1).getNom()+" gagne");
 				System.exit(0);
 			}

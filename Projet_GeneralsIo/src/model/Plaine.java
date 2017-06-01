@@ -30,9 +30,9 @@ public class Plaine extends Element{
 		
 	}
 
-	public void setJ(Joueur j) {
-		this.j = j;
-		this.couleur=j.getColor();
+	public void setJ(Joueur jo) {
+		this.j = jo;
+		this.couleur=jo.getColor();
 	}
 	
     public Plaine(int x,int y)  {
@@ -95,8 +95,6 @@ public class Plaine extends Element{
 	public void setSoldats(int s) {
 		this.nombreSoldats=s;
 	}
-
-    
 }
 
 

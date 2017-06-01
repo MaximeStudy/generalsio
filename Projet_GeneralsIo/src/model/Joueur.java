@@ -1,30 +1,16 @@
 package model;
 
 import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Joueur {
     /**
      * @attribute
      */
     private Boolean vie;
-
-    /**
-     * @attribute
-     */
-    
     private Color col;
     private Color encadrement;
 
-    /**
-     * @attribute
-     */
     private String nom;
-
-    /**
-     * @attribute
-     */
 
     Element estSur=null;
     Base base=null;
@@ -82,17 +68,9 @@ public class Joueur {
     public Element getEstSur() {
         return estSur;
     }
-
-    public void PrendreSoldatSuivent(Element e) {
-        //this.getEstSur().prendreSoldats();
-    }
     
     public Integer sommeCase() {
         return 0;
-    }
-    
-    public void RecupererSoldat(Plaine e) {
-        
     }
     
     public int sommeArmee() {
