@@ -3,14 +3,14 @@ package model;
 import java.awt.Color;
 
 public abstract class Element {
-    /**
+	/**
      * @attribute
      */
     private Integer y;
     private Integer x;
     private Boolean visible=false;
     private Joueur j=null;
-    
+    public static Color CouleurChateau= new Color(180,180,180,180);
 
 	public Element(Integer x, Integer y) {
         this.x=x;

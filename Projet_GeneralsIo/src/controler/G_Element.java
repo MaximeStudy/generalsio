@@ -296,7 +296,7 @@ public class G_Element {
     		for(int i=0;i<mesElements.size();i++)
         	{
         		//incrementer seulement les chateaux non vide
-    			if(mesElements.get(i) instanceof Chateau && mesElements.get(i).getCouleur()!=Color.WHITE)
+    			if(mesElements.get(i) instanceof Chateau && mesElements.get(i).getCouleur()!=Element.CouleurChateau)
     			{
         			Plaine p=(Plaine) mesElements.get(i);
         			System.out.println(p.getSoldats());

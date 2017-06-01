@@ -133,14 +133,11 @@ public class FenetreJeu extends JFrame implements KeyListener
 	
 	private class GestionnaireEvenement extends MouseAdapter
 	{
-		
-		private int CaseSelect[];
 		private int ligneClic;
 		private int colonneClic;	
 		
 		public void mouseClicked(MouseEvent eve)
 		{
-			CaseSelect = new int[2];
 			if (eve.getSource() instanceof JLabel) // donc on a clique sur un Label
 			{
 				for (int ligne = 0; ligne < COLONNE; ligne++)
@@ -150,12 +147,10 @@ public class FenetreJeu extends JFrame implements KeyListener
 					{
 						if (eve.getSource() == JL_cases[colonne][ligne])
 						{
-							JL_cases[ligneClic][colonneClic].setBorder(BorderFactory.createLineBorder(Color.black, 2));	// encadre case
+							JL_cases[colonneClic][ligneClic].setBorder(BorderFactory.createLineBorder(Color.black, 2));	// encadre case
 							colonneClic= colonne;
 							ligneClic = ligne;
 							JL_cases[colonneClic][ligneClic].setBorder(BorderFactory.createLineBorder(Color.white, 2));	// encadre case
-							CaseSelect[0]=ligneClic;
-							CaseSelect[1]=colonneClic;
 						}
 					}
 				}

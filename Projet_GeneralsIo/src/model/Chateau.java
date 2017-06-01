@@ -8,6 +8,7 @@ public class Chateau extends Plaine {
      */
     public Chateau(int x,int y) {
         super(x,y);
+        super.setCouleur(CouleurChateau);
         /* Les soldats de departs du chateau est genere aleatoirement */
         this.setSoldats(ThreadLocalRandom.current().nextInt(40, 50 + 1));
     }
