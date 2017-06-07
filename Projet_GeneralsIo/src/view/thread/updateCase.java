@@ -11,7 +11,7 @@ import model.Chateau;
 import model.Element;
 import view.form.FenetreJeu;
 
-public class ChronoDeplacement implements Runnable {
+public class updateCase implements Runnable {
 	static Font font = new Font("Calibri",Font.CENTER_BASELINE,18);
 
 	@Override

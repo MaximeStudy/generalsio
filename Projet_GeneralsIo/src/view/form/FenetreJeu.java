@@ -7,8 +7,8 @@ import controler.G_Element;
 import controler.G_Joueur;
 import model.thread.IncrementationChateau;
 import model.thread.IncrementationPlaine;
-import view.thread.ChronoDeplacement;
-import view.thread.VerifGagnant;
+import view.VerifGagnant;
+import view.thread.updateCase;
 
 import java.awt.*;
 import javax.swing.*;
@@ -83,7 +83,7 @@ public class FenetreJeu extends JFrame implements KeyListener
 			
 			
 			/* Lancement du Thread */
-			ChronoDeplacement c=new ChronoDeplacement();
+			updateCase c=new updateCase();
 			Thread threadCase =  new Thread(c) ;
 			
 			IncrementationPlaine i=new IncrementationPlaine();
@@ -93,12 +93,12 @@ public class FenetreJeu extends JFrame implements KeyListener
 			Thread threadIncChateau =  new Thread(ch) ;
 			
 			VerifGagnant verif=new VerifGagnant();
-			Thread threadVerif =  new Thread(verif) ;
 			
 			threadCase.start();
 			threadIncPlaine.start();
 			threadIncChateau.start();
-			threadVerif.start();
+			
+
 	}
 
 	
