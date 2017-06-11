@@ -21,3 +21,5 @@ local.properties
 .externalToolBuilders/
 *.class
 .metadata/*
+./Fork_jar/.idea
+./Fork_jar/Fo
