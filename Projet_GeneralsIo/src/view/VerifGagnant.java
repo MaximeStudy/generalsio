@@ -23,12 +23,12 @@ public class VerifGagnant
 					if (colorAttaque == colorJ1)
 					{
 					JOptionPane.showMessageDialog(null, "Bleu gagne");
-					System.exit(0);
+					System.exit(1);//code exit indique le gagnant
 					}
 					else
 					{
 						JOptionPane.showMessageDialog(null, "Rouge gagne");
-						System.exit(0);
+						System.exit(2);//code exit indique le gagnant
 					}
 				}
 				

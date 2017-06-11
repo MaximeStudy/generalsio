@@ -1,6 +1,7 @@
 package model.thread;
 
 import controler.G_Element;
+import view.Main;
 
 public class IncrementationPlaine implements Runnable {
 	@Override
@@ -8,9 +9,9 @@ public class IncrementationPlaine implements Runnable {
 		while(true)
 		{
 			try {
-				// attente 1 seconde
-				Thread.sleep(10000);
-				
+				double tmp = 1 / Main.incrementationP;
+				int val = (int) (1000 * tmp);
+				Thread.sleep(val);//10000
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}

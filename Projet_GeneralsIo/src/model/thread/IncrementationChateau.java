@@ -1,6 +1,7 @@
 package model.thread;
 
 import controler.G_Element;
+import view.Main;
 
 public class IncrementationChateau implements Runnable {
 	@Override
@@ -8,9 +9,9 @@ public class IncrementationChateau implements Runnable {
 		while(true)
 		{
 			try {
-				// attente 1 seconde
-				Thread.sleep(500);
-				
+				double tmp = 1 / Main.incrementationC;
+				int val = (int) (1000 * tmp);
+				Thread.sleep(val);//500
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
