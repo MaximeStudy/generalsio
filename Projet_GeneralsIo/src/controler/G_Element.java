@@ -163,7 +163,7 @@ public class G_Element {
         return e1;
     }
     
-    /* Recupère l'element de en-dessus par rapport à la position e */
+    /* RecupÃ¨re l'element de en-dessus par rapport Ã  la position e */
     public static Element getElementBas(Element e) {
         Element e1 = getElement(e.getX() , e.getY()+1);
         if (e1 == null) {
@@ -171,7 +171,7 @@ public class G_Element {
         }
         return e1;
     }
-    /* Recupère l'element de en-bas à gauche par rapport à la position e */
+    /* RecupÃ¨re l'element de en-bas Ã  gauche par rapport Ã  la position e */
     public static Element getElementBasGauche(Element e) {
     	 Element e1 = getElement(e.getX() -1, e.getY() +1);
          if (e1 == null) {
@@ -181,7 +181,7 @@ public class G_Element {
 
     }
 
-    /* Recupère l'element de en-haut à droite par rapport à la position e */
+    /* RecupÃ¨re l'element de en-haut Ã  droite par rapport Ã  la position e */
     public static Element getElementHautDroite(Element e) {
     	 Element e1 = getElement(e.getX() +1, e.getY() -1);
          if (e1 == null) {
@@ -190,7 +190,7 @@ public class G_Element {
          return e1;
     }
 
-    /* Recupère l'element de haut-dessus par rapport à la position e */
+    /* RecupÃ¨re l'element de haut-dessus par rapport Ã  la position e */
     public static Element getElementHaut(Element e) {
         Element e1 = getElement(e.getX(), e.getY()-1);
         if (e1 == null) {
@@ -199,7 +199,7 @@ public class G_Element {
         return e1;
     }
 
-    /* Recupère l'element de gauche par rapport à la position e */
+    /* RecupÃ¨re l'element de gauche par rapport Ã  la position e */
     public static Element getElementGauche(Element e) {
         Element e1 = getElement(e.getX()-1, e.getY());
         if (e1 == null) {
@@ -208,7 +208,7 @@ public class G_Element {
         return e1;
     }
 
-    /* Recupère l'element de en-bas à droite par rapport à la position e */
+    /* RecupÃ¨re l'element de en-bas Ã  droite par rapport Ã  la position e */
     public static Element getElementBasDroite(Element e) {
         Element e1 = getElement(e.getX() + 1, e.getY() + 1);
         if (e1 == null ) {
@@ -217,7 +217,7 @@ public class G_Element {
         return e1;
     }
     
-    /* Recupère l'element de en-haut à gauche par rapport à la position e */
+    /* RecupÃ¨re l'element de en-haut Ã  gauche par rapport Ã  la position e */
     public static Element getElementHautGauche(Element e) {
     	 Element e1 = getElement(e.getX() -1, e.getY() -1);
          if (e1 == null ) {
@@ -226,7 +226,7 @@ public class G_Element {
          return e1;
     }
     
-    /* Recupère l'element de droite par rapport à la position e */
+    /* RecupÃ¨re l'element de droite par rapport Ã  la position e */
     public static Element getElementDroite(Element e) {
         Element e1 = getElement(e.getX()+1, e.getY());
         if (e1 == null ) { // pour ne pas bouger si la case n'existe pas
@@ -235,7 +235,7 @@ public class G_Element {
         return e1;
     }
     
-    /* Renvoie l'élement à la postion x et y -> null si il existe pas */
+    /* Renvoie l'Ã©lement Ã  la postion x et y -> null si il existe pas */
     public static Element getElement(Integer x, Integer y) {
         Element res = null;
         for (Element e : getTousLesElements()) {
@@ -305,5 +305,27 @@ public class G_Element {
         	}
     	}
     }
+	public static void affichageScore(JLabel ScoreB, JLabel ScoreR) {
+		synchronized (mesElements){
+			soldatBleu=0;
+			soldatRouge=0;
+			for (int i=0;i<mesElements.size();i++)
+			{
+				if(mesElements.get(i).getCouleur()==Color.BLUE){
+					int nbsoldatb=mesElements.get(i).getSoldats();
+					soldatBleu+=nbsoldatb;
+					}
+
+				if(mesElements.get(i).getCouleur()==Color.RED){
+					int nbsoldatr=mesElements.get(i).getSoldats();
+					soldatRouge+=nbsoldatr;
+				}	
+			}
+			ScoreB.setText(""+soldatBleu);
+			ScoreR.setText(""+soldatRouge);
+		}
+	}
+
+
    
 }
