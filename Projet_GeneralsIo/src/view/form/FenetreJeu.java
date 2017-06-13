@@ -24,6 +24,9 @@ public class FenetreJeu extends JFrame implements KeyListener
 	
 	private static JLabel[][] JL_cases; // tableau de JLabels
 	
+	private JLabel TextePaneau = new JLabel();
+	private JLabel ScoreBleu = new JLabel();
+	private JLabel ScoreRouge = new JLabel();
 
 	private JPanel JP_Grille = new JPanel(); 	// panel du bas ( grille )
 	private GridLayout GL_Matrice = new GridLayout(COLONNE,LIGNE); 	
@@ -38,13 +41,33 @@ public class FenetreJeu extends JFrame implements KeyListener
 	public FenetreJeu()	{
 		JL_cases = new JLabel[COLONNE][LIGNE];	 // cr�ation du tableau de JLabel
 		this.getContentPane().setLayout(null);   // cr�� bandeau vide
-		this.setSize(new Dimension(1000, 800)); //Taille fenetre entiere
+		this.setSize(new Dimension(1200, 800)); //Taille fenetre entiere
 		this.setTitle("Generalsio");			 //Titre
 
 		JP_Grille.setBounds(new Rectangle(150, 10, 700, 700));	// ajuste le JPannel dans la JFrame
 		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//cr�� une bordure autour du pannel
 		JP_Grille.setLayout(GL_Matrice);
-		this.add(JP_Grille);	
+		this.add(JP_Grille);
+		
+		TextePaneau.setBounds(new Rectangle(900, 50, 250, 20));
+		TextePaneau.setText("Nombre de soldats par équipe");
+		TextePaneau.setFont(new Font("Roboto", Font.BOLD, 18));
+		
+		ScoreBleu.setBounds(new Rectangle(930, 80, 100, 100));
+		ScoreBleu.setText("1");
+		ScoreBleu.setFont(new Font("Roboto", Font.BOLD, 30));
+		ScoreBleu.setForeground(Color.BLUE);
+		
+		ScoreRouge.setBounds(new Rectangle(1050, 80, 100, 100));
+		ScoreRouge.setText("1");
+		ScoreRouge.setFont(new Font("Roboto", Font.BOLD, 30));
+		ScoreRouge.setForeground(Color.RED);
+		
+		this.add(TextePaneau);
+		this.add(ScoreBleu);
+		this.add(ScoreRouge);
+		
+		this.requestFocus(true);
 
 		for (int ligne = 0; ligne < COLONNE; ligne++)
 		{
@@ -94,10 +117,13 @@ public class FenetreJeu extends JFrame implements KeyListener
 			
 			VerifGagnant verif=new VerifGagnant();
 			
+			AffichageScore a = new AffichageScore(ScoreBleu,ScoreRouge);
+			Thread threadAffichage = new Thread(a);
+			
 			threadCase.start();
 			threadIncPlaine.start();
 			threadIncChateau.start();
-			
+			threadAffichage.start();
 
 	}
 
@@ -236,5 +262,20 @@ public class FenetreJeu extends JFrame implements KeyListener
 
      }
 	
+	public JLabel getScoreBleu() {
+			return ScoreBleu;
+		}
+
+		public void setScoreBleu(JLabel scoreBleu) {
+			ScoreBleu = scoreBleu;
+		}
+
+		public JLabel getScoreRouge() {
+			return ScoreRouge;
+		}
+
+		public void setScoreRouge(JLabel scoreRouge) {
+			ScoreRouge = scoreRouge;
+		}
 }
 
