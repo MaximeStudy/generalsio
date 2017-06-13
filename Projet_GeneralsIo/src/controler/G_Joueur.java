@@ -51,8 +51,8 @@ public class G_Joueur {
             {
             	j.setEstSur(j.getBase());
             }
-            VerifGagnant.TestGagnant(G_Joueur.getListeJoueur().get(1).getColor(), G_Joueur.getListeJoueur().get(0).getBase().getCouleur());
-            VerifGagnant.TestGagnant(G_Joueur.getListeJoueur().get(0).getColor(),G_Joueur.getListeJoueur().get(1).getBase().getCouleur());
+            //VerifGagnant.TestGagnant(G_Joueur.getListeJoueur().get(1).getColor(), G_Joueur.getListeJoueur().get(0).getBase().getCouleur());
+            //VerifGagnant.TestGagnant(G_Joueur.getListeJoueur().get(0).getColor(),G_Joueur.getListeJoueur().get(1).getBase().getCouleur());
     	}
     	
     }

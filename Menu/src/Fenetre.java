@@ -19,16 +19,16 @@ public class Fenetre extends JFrame {
     private JLabel label = new JLabel();
 
     private void actualiser_param() {
-        String str = String.format("Lancer une partie Generals.io << Partie %d >>", nb_partie);
+        String str = String.format("Lancer une partie Generals.io\n << Partie %d >>", nb_partie);
         this.bouton.setText(str);
         str = String.format("Score ==> %s: %d et %s: %d", nom_a, score[0], nom_b, score[1]);
         this.label.setText(str);
     }
 
     public Fenetre() {
-        this.remise_zero.setText("Remise Ã  zÃ©ro");
+        this.remise_zero.setText("Remise à zéro");
         this.setTitle("General.io");
-        this.setSize(400, 110);
+        this.setSize(600, 110);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         this.getContentPane().setLayout(new FlowLayout());
