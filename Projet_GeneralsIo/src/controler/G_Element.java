@@ -64,9 +64,10 @@ public class G_Element {
         }
         return li;
     }
-    /* Foncton permettant de remplir le plateau */
     
+    /* Foncton permettant de remplir le plateau */
     public static void remplirPlateau() {
+    	G_Element.getTousLesElements().clear();
     	/* Rempli le plateau avec des plaines */
     	for(int i=0;i<18;i++)
 		{
@@ -100,8 +101,8 @@ public class G_Element {
 				G_Element.ajouterChateau(xAlea, yAlea);
 			}
 		}
-		//TODO revoir cette partie
-    	/* Cree les differentes montagne */
+
+		/* Cree les differentes montagne */
 		for (int i=0; i< nombreMontagne; i++)
 		{
 			xAlea=(int) (Math.random()*(18));  //Math.random()*( max - mini + 1 ) ) + mini;
@@ -152,7 +153,7 @@ public class G_Element {
 		}
 
     }
-    
+    /* recupere la base d'un couleur */
     public static Element getBase(Color c) {
     	Element e1=null;
     	for(int i=0;i<getTousLesElements().size();i++)
@@ -178,7 +179,6 @@ public class G_Element {
              e1 = e;
          }
          return e1;
-
     }
 
     /* Recupère l'element de en-haut à droite par rapport à la position e */
@@ -247,10 +247,6 @@ public class G_Element {
         return res;
     }
     
-    public void prendreElementsAvecSoi(Element ancien)
-    {
-    	
-    }
     public static void ajouterPlaine(int x,int y)
     {
     	mesElements.add(new Plaine(x,y));
@@ -277,30 +273,36 @@ public class G_Element {
     
     public static void incrementerPlaine()
     {
-    	for(int i=0;i<mesElements.size();i++)
+    	synchronized (mesElements)
     	{
-    		//incrementer seulement les plaines
-			if(mesElements.get(i) instanceof Plaine && mesElements.get(i).getCouleur()!=Color.WHITE && !(mesElements.get(i) instanceof Chateau))
-			{
-    			Plaine p=(Plaine) mesElements.get(i);
-    			System.out.println(p.getSoldats());
+    		for(int i=0;i<mesElements.size();i++)
+        	{
+        		//incrementer seulement les plaines
+    			if(mesElements.get(i) instanceof Plaine && mesElements.get(i).getCouleur()!=Color.WHITE && !(mesElements.get(i) instanceof Chateau))
+    			{
+        			Plaine p=(Plaine) mesElements.get(i);
+        			System.out.println(p.getSoldats());
 
-    			p.incrementerSoldat();
-			} 	
+        			p.incrementerSoldat();
+    			} 	
+        	}
     	}
     }
     
     public static void incrementerChateaux()
     {
-    	for(int i=0;i<mesElements.size();i++)
+    	synchronized (mesElements)
     	{
-    		//incrementer seulement les chateaux non vide
-			if(mesElements.get(i) instanceof Chateau && mesElements.get(i).getCouleur()!=Color.WHITE)
-			{
-    			Plaine p=(Plaine) mesElements.get(i);
-    			System.out.println(p.getSoldats());
-    			p.incrementerSoldat();
-			} 	
+    		for(int i=0;i<mesElements.size();i++)
+        	{
+        		//incrementer seulement les chateaux non vide
+    			if(mesElements.get(i) instanceof Chateau && mesElements.get(i).getCouleur()!=Color.WHITE)
+    			{
+        			Plaine p=(Plaine) mesElements.get(i);
+        			System.out.println(p.getSoldats());
+        			p.incrementerSoldat();
+    			} 	
+        	}
     	}
     }
    

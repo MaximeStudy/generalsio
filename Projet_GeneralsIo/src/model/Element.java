@@ -49,6 +49,5 @@ public abstract class Element {
     
     public abstract int getSoldats() ;
     public abstract void setSoldats(int s) ;
-
     
 }
