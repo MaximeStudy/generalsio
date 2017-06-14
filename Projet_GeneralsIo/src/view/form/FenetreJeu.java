@@ -46,8 +46,11 @@ public class FenetreJeu extends JFrame
 	private JButton boutonReset = new JButton();
 	private JPanel panelControle = new JPanel(); // panel du haut
 	private static boolean ThreadTourne=false;
-
+	private static int OUI=0;
+	private static int NON=1;
 	
+	private JOptionPane confirmation = new JOptionPane();
+	private static int OUI_NON=NON;
 	//initialise la surface de jeu
 	public FenetreJeu()	{
 		
@@ -56,16 +59,16 @@ public class FenetreJeu extends JFrame
 		
 		JL_cases = new JLabel[COLONNE][LIGNE];	 // création du tableau de JLabel
 		this.getContentPane().setLayout(null);   // création bandeau vide
-		this.setSize(new Dimension(1000, 850)); //Taille fenetre entiere
+		this.setSize(new Dimension(1000, 780)); //Taille fenetre entiere
 		this.setTitle("Generalsio");			 //Titre
 		
-
-		boutonReset.setBounds(new Rectangle(380, 10, 310, 25));
-		boutonDebuter.setBounds(new Rectangle(15, 10, 310, 25));
-		boutonDebuter.setText("DEBUTER");
+		
+		boutonReset.setBounds(new Rectangle(15, 220, 75, 70));
+		boutonDebuter.setBounds(new Rectangle(15, 350, 75, 70));
+		boutonDebuter.setText("DEBUT");
 		boutonReset.setText("RESET");
 	
-		panelControle.setBounds(new Rectangle(150, 10, 700, 45));
+		panelControle.setBounds(new Rectangle(30, 20, 100, 700));
 		panelControle.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
 		panelControle.setLayout(null);
 		panelControle.add(boutonReset, null);
@@ -74,7 +77,7 @@ public class FenetreJeu extends JFrame
 
 		
 		
-		JP_Grille.setBounds(new Rectangle(150, 60, 700, 700));	// ajuste le JPannel dans la JFrame
+		JP_Grille.setBounds(new Rectangle(150, 20, 700, 700));	// ajuste le JPannel dans la JFrame
 		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//crï¿½ï¿½ une bordure autour du pannel
 		JP_Grille.setSize(TaillePlateau);
 		JP_Grille.setLayout(GL_Matrice);
@@ -235,14 +238,21 @@ public class FenetreJeu extends JFrame
                  System.out.println("Right 1");
                  G_Carte.deplacerDroite(G_Joueur.getJoueur(Color.BLUE));
                  break;
-             case KeyEvent.VK_R :	    
-					if(ThreadTourne == true) //Test pour arreter les Threads seulement si ils tournent
+             case KeyEvent.VK_R :
+            	 OUI_NON=JOptionPane.showConfirmDialog(null, "Le Reset est irréversible. Êtes-vous sûr de vouloir continuer?",
+                         "Veuillez confirmer votre choix",
+                         JOptionPane.YES_NO_OPTION);
+					if(OUI_NON==OUI)
 					{
-		                 nettoyerPropre();
-		                 ThreadTourne=false;
+						if(ThreadTourne == true) //Test pour arreter les Threads seulement si ils tournent
+						{
+			                 nettoyerPropre();
+			                 ThreadTourne=false;
+						}
+						
+					 System.out.println("Restart");
+	                 InitCarte();
 					}
-				 System.out.println("Restart");
-                 InitCarte();
                  break;
                  
              case KeyEvent.VK_ENTER :
@@ -315,14 +325,27 @@ public class FenetreJeu extends JFrame
 				// si on clique sur le bouton débuter
 				if (eve.getSource() == boutonReset) 
 				{
-					if(ThreadTourne == true)
+					OUI_NON=JOptionPane.showConfirmDialog(null, "Le Reset est irréversible. Êtes-vous sûr de vouloir continuer?",
+                            "Veuillez confirmer votre choix",
+                            JOptionPane.YES_NO_OPTION);
+					if(OUI_NON==OUI)
 					{
-		                 nettoyerPropre();
-		                 ThreadTourne=false;
+					    ///l'utilisateur a dit oui
+						if(ThreadTourne == true)
+						{
+			                 nettoyerPropre();
+			                 ThreadTourne=false;
+						}
+						System.out.println("Restart");
+		                InitCarte();
+		                jtfSaisi.requestFocusInWindow();
 					}
-					System.out.println("Restart");
-	                InitCarte();
-	                jtfSaisi.requestFocusInWindow();
+					else
+					{
+						jtfSaisi.requestFocusInWindow();
+						// l'utilisateur a dit non
+					}
+					
 	            
 				}
 				if (eve.getSource() == boutonDebuter) 

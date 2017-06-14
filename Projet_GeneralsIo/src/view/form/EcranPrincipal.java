@@ -29,6 +29,9 @@ public class EcranPrincipal extends JPanel
     private JPanel jpTitre=new JPanel();
     private JPanel jpMilieu=new JPanel();
     
+	private int OUI=0;
+	private int NON=1;
+	
     public EcranPrincipal(FenetreJeu fenetreJeu, JLayeredPane JL_Pane, JTextField jtfSaisi) 
     {
     	
@@ -41,7 +44,6 @@ public class EcranPrincipal extends JPanel
     
     /* Ajout des boutons dans le panelMilieu*/
     jpMilieu.setLayout(new GridBagLayout());
-    
     jpMilieu.add(jbJouer, gbc);
     gbc.gridy++;
     jpMilieu.add(jbQuitter, gbc);
@@ -78,9 +80,18 @@ public class EcranPrincipal extends JPanel
     //on quitte quand on clique sur quitter
     jbQuitter.addActionListener(new ActionListener() 
     {
+		JOptionPane confirmation = new JOptionPane();
+		int OUI_NON=NON;
+		
         public void actionPerformed(ActionEvent e) 
         {
+			OUI_NON=JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir quitter ?",
+                    "Veuillez confirmer votre choix",
+                    JOptionPane.YES_NO_OPTION);
+			if(OUI_NON==OUI)
+			{
             System.exit(0);
+			}
         }
     });
     
