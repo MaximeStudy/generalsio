@@ -18,7 +18,7 @@ public class Montagne extends Element {
     }
     
     public Color getCouleur() {
-        return Color.WHITE;
+        return Color.GRAY;
     }
     
     public int getSoldats() { 

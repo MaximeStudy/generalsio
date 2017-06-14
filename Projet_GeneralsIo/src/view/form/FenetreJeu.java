@@ -15,40 +15,71 @@ import javax.swing.*;
 import java.awt.event.*;
 
  
-public class FenetreJeu extends JFrame implements KeyListener
+public class FenetreJeu extends JFrame
 {
+	
+    private JTextField jtfSaisi = new JTextField();
+    private JPanel jpMessageSaisi = new JPanel();
+    
 	//for keylistener
 	private static final long serialVersionUID = 1L;
 
-	private int COLONNE=18,LIGNE=18;
+	private static int COLONNE=18;
+	private static int LIGNE=18;
 	
 	private static JLabel[][] JL_cases; // tableau de JLabels
 	
-	private JButton bouton = new JButton("Redemarrer");
-	
-	private JPanel JP_Grille = new JPanel(); 	// panel du bas ( grille )
+	private static JPanel JP_Grille = new JPanel(); 	// panel du bas ( grille )
 	private GridLayout GL_Matrice = new GridLayout(COLONNE,LIGNE); 	
 	
-	private String dossierIcone = "Icone/";
+	private static String dossierIcone = "Icone/";
 	private static Thread threadCase,threadIncPlaine,threadIncChateau,threadVerif;
-	private GestionnaireEvenement gest = new GestionnaireEvenement();
 	
 	static Font font = new Font("Calibri",Font.CENTER_BASELINE,18);	//police ecrite sur les cases
+	
+	private Dimension TaillePlateau = new Dimension(700,700);
+	private JLayeredPane JL_Pane;//c'est le contener qui reçoit les images
+	
+	
+	private JButton boutonDebuter = new JButton();
+	private JTextField champTexte = new JTextField();
+	private JButton boutonReset = new JButton();
+	private JPanel panelControle = new JPanel(); // panel du haut
+	private static boolean ThreadTourne=false;
+
 	
 	//initialise la surface de jeu
 	public FenetreJeu()	{
 		
-		bouton.setBounds(1, 1, 1, 50);
+		//grace a ca, on peut rendre focusable le plateau
+		JL_Pane=new JLayeredPane();
 		
 		JL_cases = new JLabel[COLONNE][LIGNE];	 // création du tableau de JLabel
 		this.getContentPane().setLayout(null);   // création bandeau vide
-		this.setSize(new Dimension(1000, 800)); //Taille fenetre entiere
+		this.setSize(new Dimension(1000, 850)); //Taille fenetre entiere
 		this.setTitle("Generalsio");			 //Titre
+		
 
-		JP_Grille.setBounds(new Rectangle(150, 10, 700, 700));	// ajuste le JPannel dans la JFrame
+		boutonReset.setBounds(new Rectangle(380, 10, 310, 25));
+		boutonDebuter.setBounds(new Rectangle(15, 10, 310, 25));
+		boutonDebuter.setText("DEBUTER");
+		boutonReset.setText("RESET");
+	
+		panelControle.setBounds(new Rectangle(150, 10, 700, 45));
+		panelControle.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		panelControle.setLayout(null);
+		panelControle.add(boutonReset, null);
+		panelControle.add(boutonDebuter, null);
+
+
+		
+		
+		JP_Grille.setBounds(new Rectangle(150, 60, 700, 700));	// ajuste le JPannel dans la JFrame
 		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//crï¿½ï¿½ une bordure autour du pannel
+		JP_Grille.setSize(TaillePlateau);
 		JP_Grille.setLayout(GL_Matrice);
-		this.add(JP_Grille);
+		JL_Pane.add(JP_Grille);
+		this.add(JL_Pane);
 		
 
 		for (int ligne = 0; ligne < COLONNE; ligne++)
@@ -57,18 +88,28 @@ public class FenetreJeu extends JFrame implements KeyListener
 			{
 				JL_cases[colonne][ligne] = new JLabel(); // creation du JLabel
 				JP_Grille.add(JL_cases[colonne][ligne]); // ajouter au Panel
-				//JL_cases[colonne][ligne].setOpaque(true);
-				//JL_cases[colonne][ligne].setBorder(BorderFactory.createLineBorder(new Color(0,0,0), 2));	// encadre chaque case
-				//JL_cases[colonne][ligne].addMouseListener(gest); // ajouter l'ï¿½ï¿½couteur aux
 			}	
 		}
-		InitCarte();
 		
-		//permet de lancer le KeyListener
-		addKeyListener(this);
+		
+        jpMessageSaisi.setLayout(new BoxLayout(jpMessageSaisi, BoxLayout.PAGE_AXIS));
+        //Message et Saisi
+        jpMessageSaisi.add(jtfSaisi);
+        JL_Pane.add(jpMessageSaisi);
+		
+        JL_Pane.add(panelControle, null);
+
+        //Les ecouteurs
+		GestionnaireEvenement gest = new GestionnaireEvenement();
+		boutonDebuter.addMouseListener(gest);
+		boutonReset.addMouseListener(gest);
+        jtfSaisi.addKeyListener(new TAdapter());
+        
+        //On démarre avec EcranPrincipal
+		setContentPane(new EcranPrincipal(this, JL_Pane, jtfSaisi));
 	}
 	
-	private void InitCarte()	{
+	public static void InitCarte()	{
 			G_Carte.initialiserCarte();
 			JP_Grille.removeAll();
 			for (int ligne = 0; ligne < COLONNE; ligne++)
@@ -81,11 +122,9 @@ public class FenetreJeu extends JFrame implements KeyListener
 			}
 			for(int i=0;i<18;i++) {
 				for(int j=0;j<18;j++) {
-					//System.out.println("x :"+G_Element.getElement(i, j).getX()+" y :"+G_Element.getElement(i, j).getY()+" nomElem :"+G_Element.getElement(i, j).getNomElement());
 					//affiche les elements sur la carte
 					JL_cases[i][j].setOpaque(true);
 					JL_cases[i][j].setBorder(BorderFactory.createLineBorder(new Color(0,0,0), 2));	// encadre chaque case
-					JL_cases[i][j].addMouseListener(gest); // ajouter l'écouteur aux
 					setIcon(G_Element.getElement(i, j).getNomElement(), JL_cases[i][j]);
 					setCouleur(G_Element.getElement(i, j).getCouleur(), JL_cases[i][j]);
 					//on veut pas afficher les soldats de la montagne
@@ -112,14 +151,18 @@ public class FenetreJeu extends JFrame implements KeyListener
 			VerifGagnant verif=new VerifGagnant();
 			threadVerif =  new Thread(verif) ;
 			
-			threadCase.start();
-			threadIncPlaine.start();
-			threadIncChateau.start();
-			threadVerif.start();
+
 	}
 
+	private static void demarreThreads()
+	{
+		threadCase.start();
+		threadIncPlaine.start();
+		threadIncChateau.start();
+		threadVerif.start();
+	}
 	
-	private void setIcon(String element, JLabel position)
+	private static void setIcon(String element, JLabel position)
 		{
 		String image= dossierIcone + element+".png";
 		position.setIcon(new ImageIcon(image));
@@ -147,38 +190,16 @@ public class FenetreJeu extends JFrame implements KeyListener
 		JL_cases = jL_cases;
 	}
 	
+
 	
-	private class GestionnaireEvenement extends MouseAdapter
-	{
-		
-		private int CaseSelect[];
-		private int ligneClic;
-		private int colonneClic;	
-		
-		public void mouseClicked(MouseEvent eve)
-		{
-			
-		}
-		
-	
-	}
-	
-	public void encadrer(JLabel jl, Color c, int largeur)
+	public static void encadrer(JLabel jl, Color c, int largeur)
 	{			
 		jl.setBorder(BorderFactory.createLineBorder(c, largeur));	// encadre case
 	}
 
-	 @Override
-	 public void keyTyped(KeyEvent e) {
-     	
-     }
 
-	 @Override
-     public void keyPressed(KeyEvent e) {
-         
-     }
-	 
-	 public void nettoyerPropre() {
+	 public static void nettoyerPropre() 
+	 {
 		 /* On kill les threads */
 		threadCase.stop();
 		threadIncPlaine.stop();
@@ -187,8 +208,8 @@ public class FenetreJeu extends JFrame implements KeyListener
 	 }
 	 
 	 
-	 @Override
-     public void keyReleased(KeyEvent e) {
+	 public static void keyReleased(KeyEvent e) 
+	 {
          //Le curseur a change, il faut mettre la decoration de la case par defaut (noir)
 		 encadrer(JL_cases[G_Joueur.getJoueur(Color.BLUE).getEstSur().getX()][G_Joueur.getJoueur(Color.BLUE).getEstSur().getY()],Color.BLACK,2);
 		 int keyCode = e.getKeyCode();
@@ -214,18 +235,31 @@ public class FenetreJeu extends JFrame implements KeyListener
                  System.out.println("Right 1");
                  G_Carte.deplacerDroite(G_Joueur.getJoueur(Color.BLUE));
                  break;
-             case KeyEvent.VK_R :
-                 // handle right
-                 System.out.println("Restart");
-                 nettoyerPropre();
+             case KeyEvent.VK_R :	    
+					if(ThreadTourne == true) //Test pour arreter les Threads seulement si ils tournent
+					{
+		                 nettoyerPropre();
+		                 ThreadTourne=false;
+					}
+				 System.out.println("Restart");
                  InitCarte();
+                 break;
+                 
+             case KeyEvent.VK_ENTER :
+                 // handle right
+					if(ThreadTourne == false)
+					{
+						System.out.println("Démarre");
+						demarreThreads();
+		                ThreadTourne=true;
+					}
                  break;
           }
          
 		 encadrer(JL_cases[G_Joueur.getJoueur(Color.BLUE).getEstSur().getX()][G_Joueur.getJoueur(Color.BLUE).getEstSur().getY()],Color.CYAN,5);
-		 
 		 encadrer(JL_cases[G_Joueur.getJoueur(Color.RED).getEstSur().getX()][G_Joueur.getJoueur(Color.RED).getEstSur().getY()],Color.BLACK,2);
-         switch( keyCode ) { 
+
+		 switch( keyCode ) { 
          case KeyEvent.VK_Z:
              System.out.println("Up 2");
              G_Carte.deplacerHaut(G_Joueur.getJoueur(Color.RED));
@@ -252,6 +286,63 @@ public class FenetreJeu extends JFrame implements KeyListener
          encadrer(JL_cases[G_Joueur.getJoueur(Color.RED).getEstSur().getX()][G_Joueur.getJoueur(Color.RED).getEstSur().getY()],Color.ORANGE,5);
 
      }
+	 
+	 
+	    private class TAdapter extends KeyAdapter 
+	    {
+	        //pour le keypress
+	        @Override
+	        public void keyReleased(KeyEvent e) 
+	        {
+	        	
+	        	FenetreJeu.keyReleased(e);
+	        }
+	    }
+
+	    public JTextField getJtfSaisi() 
+	    {
+	        return jtfSaisi;
+	    }
+	    
+	    public JLayeredPane getJL_Pane() 
+	    {
+	        return JL_Pane;
+	    }
+		private class GestionnaireEvenement extends MouseAdapter 
+		{
+			public void mouseClicked(MouseEvent eve) 
+			{
+				// si on clique sur le bouton débuter
+				if (eve.getSource() == boutonReset) 
+				{
+					if(ThreadTourne == true)
+					{
+		                 nettoyerPropre();
+		                 ThreadTourne=false;
+					}
+					System.out.println("Restart");
+	                InitCarte();
+	                jtfSaisi.requestFocusInWindow();
+	            
+				}
+				if (eve.getSource() == boutonDebuter) 
+				{
+					if(ThreadTourne == false)
+					{
+						System.out.println("Démarre");
+						demarreThreads();
+		                jtfSaisi.requestFocusInWindow();
+		                ThreadTourne=true;
+					}
+					else
+					{
+						jtfSaisi.requestFocusInWindow();
+					}
+				}
+
+			}
+		}
+
 	
 }
 
