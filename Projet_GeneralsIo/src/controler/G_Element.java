@@ -28,6 +28,8 @@ public class G_Element {
 	private static int nombreChateau=22;
 	private static Color colJ1=Color.BLUE;
 	private static Color colJ2=Color.RED;
+	private static int soldatBleu;
+	private static int soldatRouge;
 	
     /* Renvoie la liste d'elements qui se situe autour du personnage */
     public static List<Element> getElementAutourPerso(Element e) {
