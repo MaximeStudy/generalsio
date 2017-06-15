@@ -1,12 +1,14 @@
 package view.form;
 
 import javax.swing.border.EtchedBorder;
+import java.net.URL;
 
 import controler.G_Carte;
 import controler.G_Element;
 import controler.G_Joueur;
 import model.thread.IncrementationChateau;
 import model.thread.IncrementationPlaine;
+import view.Main;
 import view.thread.ChronoDeplacement;
 import view.thread.VerifGagnant;
 
@@ -36,13 +38,13 @@ public class FenetreJeu extends JFrame
 	private static JPanel JP_Grille = new JPanel(); 	// panel du bas ( grille )
 	private GridLayout GL_Matrice = new GridLayout(COLONNE,LIGNE); 	
 	
-	private static String dossierIcone = "Icone/";
+	private static String dossierIcone = "src/icone/";
 	private static Thread threadCase,threadIncPlaine,threadIncChateau,threadVerif;
 	
 	static Font font = new Font("Calibri",Font.CENTER_BASELINE,18);	//police ecrite sur les cases
 	
 	private Dimension TaillePlateau = new Dimension(700,700);
-	private JLayeredPane JL_Pane;//c'est le contener qui reÃ§oit les images
+	private JLayeredPane JL_Pane;//c'est le contener qui reçoit les images
 	
 	
 	private JButton boutonDebuter = new JButton();
@@ -61,8 +63,8 @@ public class FenetreJeu extends JFrame
 		//grace a ca, on peut rendre focusable le plateau
 		JL_Pane=new JLayeredPane();
 		
-		JL_cases = new JLabel[COLONNE][LIGNE];	 // crÃ©ation du tableau de JLabel
-		this.getContentPane().setLayout(null);   // crÃ©ation bandeau vide
+		JL_cases = new JLabel[COLONNE][LIGNE];	 // création du tableau de JLabel
+		this.getContentPane().setLayout(null);   // création bandeau vide
 		this.setSize(new Dimension(1200, 780)); //Taille fenetre entiere
 		this.setTitle("Generalsio");			 //Titre
 		
@@ -82,7 +84,7 @@ public class FenetreJeu extends JFrame
 		
 		
 		JP_Grille.setBounds(new Rectangle(150, 20, 700, 700));	// ajuste le JPannel dans la JFrame
-		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//crÃ¯Â¿Â½Ã¯Â¿Â½ une bordure autour du pannel
+		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//crï¿½ï¿½ une bordure autour du pannel
 		JP_Grille.setSize(TaillePlateau);
 		JP_Grille.setLayout(GL_Matrice);
 		JL_Pane.add(JP_Grille);
@@ -132,7 +134,7 @@ public class FenetreJeu extends JFrame
 		boutonReset.addMouseListener(gest);
         jtfSaisi.addKeyListener(new TAdapter());
         
-        //On dÃ©marre avec EcranPrincipal
+        //On démarre avec EcranPrincipal
 		setContentPane(new EcranPrincipal(this, JL_Pane, jtfSaisi));
 	}
 	
@@ -175,26 +177,28 @@ public class FenetreJeu extends JFrame
 			IncrementationChateau ch=new IncrementationChateau();
 			threadIncChateau =  new Thread(ch) ;
 			
-			VerifGagnant verif=new VerifGagnant();
-			threadVerif =  new Thread(verif) ;
+			/*VerifGagnant verif=new VerifGagnant();
+			threadVerif =  new Thread(verif) ;*/
 			
 
 	}
 
-	private static void demarreThreads()
+	public static void demarreThreads()
 	{
 		threadCase.start();
 		threadIncPlaine.start();
 		threadIncChateau.start();
-		threadVerif.start();
+		//threadVerif.start();
 	}
 	
 	private static void setIcon(String element, JLabel position)
 		{
-		String image= dossierIcone + element+".png";
-		position.setIcon(new ImageIcon(image));
-		position.setLayout(new FlowLayout(FlowLayout.CENTER));
-	}
+		if (element!="plaine"){
+			URL url = Main.class.getResource("/icone/"+element+".png");
+			position.setIcon(new ImageIcon(url));
+			position.setLayout(new FlowLayout(FlowLayout.CENTER));
+		}
+		}
 	
 	public static void setCouleur(Color couleur, JLabel position)
 	{
@@ -231,9 +235,10 @@ public class FenetreJeu extends JFrame
 		threadCase.stop();
 		threadIncPlaine.stop();
 		threadIncChateau.stop();
-		threadVerif.stop();
+		//threadVerif.stop();
 	 }
 	 
+
 	 
 	 public static void keyReleased(KeyEvent e) 
 	 {
@@ -263,7 +268,7 @@ public class FenetreJeu extends JFrame
                  G_Carte.deplacerDroite(G_Joueur.getJoueur(Color.BLUE));
                  break;
              case KeyEvent.VK_R :
-            	 OUI_NON=JOptionPane.showConfirmDialog(null, "Le Reset est irrÃ©versible. ÃŠtes-vous sÃ»r de vouloir continuer?",
+            	 OUI_NON=JOptionPane.showConfirmDialog(null, "Le Reset est irreversible. etes-vous sur de vouloir continuer?",
                          "Veuillez confirmer votre choix",
                          JOptionPane.YES_NO_OPTION);
 					if(OUI_NON==OUI)
@@ -293,7 +298,7 @@ public class FenetreJeu extends JFrame
                  // handle right
 					if(ThreadTourne == false)
 					{
-						System.out.println("DÃ©marre");
+						System.out.println("Démarre");
 						demarreThreads();
 		                ThreadTourne=true;
 					}
@@ -356,7 +361,7 @@ public class FenetreJeu extends JFrame
 		{
 			public void mouseClicked(MouseEvent eve) 
 			{
-				// si on clique sur le bouton dÃ©buter
+				// si on clique sur le bouton débuter
 				if (eve.getSource() == boutonReset) 
 				{
 					OUI_NON=JOptionPane.showConfirmDialog(null, "Le Reset est irreversible. etes-vous sur de vouloir continuer?",
@@ -386,7 +391,7 @@ public class FenetreJeu extends JFrame
 				{
 					if(ThreadTourne == false)
 					{
-						System.out.println("DÃ©marre");
+						System.out.println("Démarre");
 						demarreThreads();
 		                jtfSaisi.requestFocusInWindow();
 		                ThreadTourne=true;

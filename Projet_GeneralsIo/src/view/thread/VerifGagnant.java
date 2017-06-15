@@ -12,7 +12,7 @@ import view.form.*;
 public class VerifGagnant implements Runnable {
 	@Override
 	public void run() {
-		int keyCode = KeyEvent.VK_R; // the A key
+		int keyCode = KeyEvent.VK_P; // the A key
 
 		while(true)
 		{
@@ -52,5 +52,6 @@ public class VerifGagnant implements Runnable {
 			}
 
 		}
+		
 	}
 }

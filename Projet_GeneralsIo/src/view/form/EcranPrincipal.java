@@ -85,7 +85,7 @@ public class EcranPrincipal extends JPanel
 		
         public void actionPerformed(ActionEvent e) 
         {
-			OUI_NON=JOptionPane.showConfirmDialog(null, "Êtes-vous sûr de vouloir quitter ?",
+			OUI_NON=JOptionPane.showConfirmDialog(null, "Etes-vous sur de vouloir quitter ?",
                     "Veuillez confirmer votre choix",
                     JOptionPane.YES_NO_OPTION);
 			if(OUI_NON==OUI)

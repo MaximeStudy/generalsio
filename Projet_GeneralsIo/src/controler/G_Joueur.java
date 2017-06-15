@@ -4,9 +4,14 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
+import model.Base;
+import model.Chateau;
 import model.Element;
 import model.Joueur;
 import model.Plaine;
+import view.thread.VerifGagnant;
 
 public class G_Joueur {
     /**
@@ -21,11 +26,14 @@ public class G_Joueur {
     }
 
     /* Change la postion du personnage */
-    public static void deplacerPers(Joueur j, Element e) {
-    	synchronized(G_Element.getTousLesElements())  {
+    public static void deplacerPers(Joueur j, Element e) 
+    {
+    	synchronized(G_Element.getTousLesElements())  
+    	{
     		/* peut seulement traverser la case si ce n'est pas une montagne, si la couleur de la case suivante est de la couleur du joueur et que le nombre sur la case presente est sup a la case suivante (la derniere clause eprmet de ne pas perdre de soldats quand on fonce vers un mur exterieur*/
             if (e.getEstFranchissable() && (e.getSoldats()+1<j.getEstSur().getSoldats() || e.getCouleur()==j.getColor()) && 
-            		j.getColor()==j.getEstSur().getCouleur() &&  j.getEstSur() != e) { 
+            		j.getColor()==j.getEstSur().getCouleur() &&  j.getEstSur() != e) 
+            { 
             	//permet de gerer si c'est un ennemi et faire moins
             	if(j.getColor() != e.getCouleur())
             	{
@@ -49,7 +57,21 @@ public class G_Joueur {
             {
             	j.setEstSur(j.getBase());
             }
+            
+            if( j.getEstSur() instanceof Base )
+            {
+
+	            if (j.getColor()  == Color.BLUE && j.getEstSur()!= j.getBase())
+	            {
+	            	JOptionPane.showMessageDialog(null, "Bleu Gagne !!");
+	            }
+	            if (j.getColor()  == Color.RED && j.getEstSur()!= j.getBase())
+	            {
+	            	JOptionPane.showMessageDialog(null, "Rouge Gagne");
+	            }
+            }
     	}
+    	
     	
     }
     
