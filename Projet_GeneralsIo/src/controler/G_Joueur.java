@@ -11,7 +11,7 @@ import model.Chateau;
 import model.Element;
 import model.Joueur;
 import model.Plaine;
-import view.thread.VerifGagnant;
+import view.form.FenetreJeu;
 
 public class G_Joueur {
     /**
@@ -63,11 +63,11 @@ public class G_Joueur {
 
 	            if (j.getColor()  == Color.BLUE && j.getEstSur()!= j.getBase())
 	            {
-	            	JOptionPane.showMessageDialog(null, "Bleu Gagne !!");
+	            	FenetreJeu.testVictoire(0);
 	            }
 	            if (j.getColor()  == Color.RED && j.getEstSur()!= j.getBase())
 	            {
-	            	JOptionPane.showMessageDialog(null, "Rouge Gagne");
+	            	FenetreJeu.testVictoire(1);
 	            }
             }
     	}

@@ -10,7 +10,6 @@ import model.thread.IncrementationChateau;
 import model.thread.IncrementationPlaine;
 import view.Main;
 import view.thread.ChronoDeplacement;
-import view.thread.VerifGagnant;
 
 import java.awt.*;
 import javax.swing.*;
@@ -176,19 +175,33 @@ public class FenetreJeu extends JFrame
 			
 			IncrementationChateau ch=new IncrementationChateau();
 			threadIncChateau =  new Thread(ch) ;
-			
-			/*VerifGagnant verif=new VerifGagnant();
-			threadVerif =  new Thread(verif) ;*/
+
 			
 
 	}
 
+	public static void testVictoire(int x)
+	{
+		if (x == 0)
+		{
+			JOptionPane.showMessageDialog(null, "Bleu Gagne !!");
+			nettoyerPropre();
+			InitCarte();
+			ThreadTourne=false;
+		}
+		else if (x == 1)
+		{
+			JOptionPane.showMessageDialog(null, "Rouge Gagne !!");
+			nettoyerPropre();
+			InitCarte();
+			ThreadTourne=false;
+		}
+	}
 	public static void demarreThreads()
 	{
 		threadCase.start();
 		threadIncPlaine.start();
 		threadIncChateau.start();
-		//threadVerif.start();
 	}
 	
 	private static void setIcon(String element, JLabel position)
@@ -235,7 +248,6 @@ public class FenetreJeu extends JFrame
 		threadCase.stop();
 		threadIncPlaine.stop();
 		threadIncChateau.stop();
-		//threadVerif.stop();
 	 }
 	 
 
@@ -284,15 +296,6 @@ public class FenetreJeu extends JFrame
 					}
                  break;
                  
-             case KeyEvent.VK_P :
-
-						if(ThreadTourne == true) //Test pour arreter les Threads seulement si ils tournent
-						{
-			                 nettoyerPropre();
-			                 ThreadTourne=false;
-						}
-	                 InitCarte();
-					break;
                  
              case KeyEvent.VK_ENTER :
                  // handle right
