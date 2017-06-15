@@ -29,9 +29,9 @@ public class FenetreJeu extends JFrame
 	
 	private static JLabel[][] JL_cases; // tableau de JLabels
 	
-	private JLabel TextePaneau = new JLabel();
-	private JLabel ScoreBleu = new JLabel();
-	private JLabel ScoreRouge = new JLabel();
+	private static JLabel TextePaneau = new JLabel();
+	private static JLabel ScoreBleu = new JLabel();
+	private static JLabel ScoreRouge = new JLabel();
 	
 	private static JPanel JP_Grille = new JPanel(); 	// panel du bas ( grille )
 	private GridLayout GL_Matrice = new GridLayout(COLONNE,LIGNE); 	
@@ -42,7 +42,7 @@ public class FenetreJeu extends JFrame
 	static Font font = new Font("Calibri",Font.CENTER_BASELINE,18);	//police ecrite sur les cases
 	
 	private Dimension TaillePlateau = new Dimension(700,700);
-	private JLayeredPane JL_Pane;//c'est le contener qui reçoit les images
+	private JLayeredPane JL_Pane;//c'est le contener qui reÃ§oit les images
 	
 	
 	private JButton boutonDebuter = new JButton();
@@ -61,9 +61,9 @@ public class FenetreJeu extends JFrame
 		//grace a ca, on peut rendre focusable le plateau
 		JL_Pane=new JLayeredPane();
 		
-		JL_cases = new JLabel[COLONNE][LIGNE];	 // création du tableau de JLabel
-		this.getContentPane().setLayout(null);   // création bandeau vide
-		this.setSize(new Dimension(1100, 780)); //Taille fenetre entiere
+		JL_cases = new JLabel[COLONNE][LIGNE];	 // crÃ©ation du tableau de JLabel
+		this.getContentPane().setLayout(null);   // crÃ©ation bandeau vide
+		this.setSize(new Dimension(1200, 780)); //Taille fenetre entiere
 		this.setTitle("Generalsio");			 //Titre
 		
 		
@@ -82,29 +82,32 @@ public class FenetreJeu extends JFrame
 		
 		
 		JP_Grille.setBounds(new Rectangle(150, 20, 700, 700));	// ajuste le JPannel dans la JFrame
-		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//crï¿½ï¿½ une bordure autour du pannel
+		JP_Grille.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));	//crÃ¯Â¿Â½Ã¯Â¿Â½ une bordure autour du pannel
 		JP_Grille.setSize(TaillePlateau);
 		JP_Grille.setLayout(GL_Matrice);
 		JL_Pane.add(JP_Grille);
 		this.add(JL_Pane);
 		
-		TextePaneau.setBounds(new Rectangle(870, 50, 250, 20));
-		TextePaneau.setText("Nombre de soldats par équipe");
+		TextePaneau.setBounds(new Rectangle(880, 50, 270, 150));
+		TextePaneau.setText("Nombre de soldats par equipe");
 		TextePaneau.setFont(new Font("Roboto", Font.BOLD, 18));
+		TextePaneau.setBorder(BorderFactory.createEtchedBorder(EtchedBorder.RAISED));
+		TextePaneau.setVerticalAlignment(JLabel.TOP);
+		TextePaneau.setHorizontalAlignment(JLabel.CENTER);
 		
-		ScoreBleu.setBounds(new Rectangle(900, 80, 100, 100));
+		ScoreBleu.setBounds(new Rectangle(930, 80, 100, 100));
 		ScoreBleu.setText("1");
 		ScoreBleu.setFont(new Font("Roboto", Font.BOLD, 30));
 		ScoreBleu.setForeground(Color.BLUE);
 		
-		ScoreRouge.setBounds(new Rectangle(1020, 80, 100, 100));
+		ScoreRouge.setBounds(new Rectangle(1050, 80, 100, 100));
 		ScoreRouge.setText("1");
 		ScoreRouge.setFont(new Font("Roboto", Font.BOLD, 30));
 		ScoreRouge.setForeground(Color.RED);
 		
-		this.add(TextePaneau);
-		this.add(ScoreBleu);
-		this.add(ScoreRouge);
+		JL_Pane.add(TextePaneau);
+		JL_Pane.add(ScoreBleu);
+		JL_Pane.add(ScoreRouge);
 
 		for (int ligne = 0; ligne < COLONNE; ligne++)
 		{
@@ -129,7 +132,7 @@ public class FenetreJeu extends JFrame
 		boutonReset.addMouseListener(gest);
         jtfSaisi.addKeyListener(new TAdapter());
         
-        //On démarre avec EcranPrincipal
+        //On dÃ©marre avec EcranPrincipal
 		setContentPane(new EcranPrincipal(this, JL_Pane, jtfSaisi));
 	}
 	
@@ -260,7 +263,7 @@ public class FenetreJeu extends JFrame
                  G_Carte.deplacerDroite(G_Joueur.getJoueur(Color.BLUE));
                  break;
              case KeyEvent.VK_R :
-            	 OUI_NON=JOptionPane.showConfirmDialog(null, "Le Reset est irréversible. Êtes-vous sûr de vouloir continuer?",
+            	 OUI_NON=JOptionPane.showConfirmDialog(null, "Le Reset est irrÃ©versible. ÃŠtes-vous sÃ»r de vouloir continuer?",
                          "Veuillez confirmer votre choix",
                          JOptionPane.YES_NO_OPTION);
 					if(OUI_NON==OUI)
@@ -276,11 +279,21 @@ public class FenetreJeu extends JFrame
 					}
                  break;
                  
+             case KeyEvent.VK_P :
+
+						if(ThreadTourne == true) //Test pour arreter les Threads seulement si ils tournent
+						{
+			                 nettoyerPropre();
+			                 ThreadTourne=false;
+						}
+	                 InitCarte();
+					break;
+                 
              case KeyEvent.VK_ENTER :
                  // handle right
 					if(ThreadTourne == false)
 					{
-						System.out.println("Démarre");
+						System.out.println("DÃ©marre");
 						demarreThreads();
 		                ThreadTourne=true;
 					}
@@ -343,10 +356,10 @@ public class FenetreJeu extends JFrame
 		{
 			public void mouseClicked(MouseEvent eve) 
 			{
-				// si on clique sur le bouton débuter
+				// si on clique sur le bouton dÃ©buter
 				if (eve.getSource() == boutonReset) 
 				{
-					OUI_NON=JOptionPane.showConfirmDialog(null, "Le Reset est irréversible. Êtes-vous sûr de vouloir continuer?",
+					OUI_NON=JOptionPane.showConfirmDialog(null, "Le Reset est irreversible. etes-vous sur de vouloir continuer?",
                             "Veuillez confirmer votre choix",
                             JOptionPane.YES_NO_OPTION);
 					if(OUI_NON==OUI)
@@ -373,7 +386,7 @@ public class FenetreJeu extends JFrame
 				{
 					if(ThreadTourne == false)
 					{
-						System.out.println("Démarre");
+						System.out.println("DÃ©marre");
 						demarreThreads();
 		                jtfSaisi.requestFocusInWindow();
 		                ThreadTourne=true;
